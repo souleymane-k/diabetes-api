@@ -16,7 +16,7 @@ app.use(helmet())
 app.use(cors())
 
 app.get('/months', (req, res) =>{
-    res.json(store.months)
+    res.send(store.months)
 })
 
 app.get('/', (req, res)=>{
