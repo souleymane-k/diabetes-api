@@ -14,6 +14,10 @@ app.use(morgan(morganSetting))
 app.use(helmet())
 app.use(cors())
 
+app.get('/months', (req, res) =>{
+    res.json(store.months)
+})
+
 app.get('/', (req, res)=>{
     res.send('Hello, diabetes-api!')
 })
