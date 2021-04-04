@@ -8,9 +8,6 @@ const express = require('express');
    res.json({ok: true});
  });
 
-//  app.get('/', (req, res)=>{
-//   res.send('Hello, diabetes-api!')
-// })
 app.get('/', (req, res)=>{
   res.json(STORE)
 
@@ -21,7 +18,7 @@ app.get('/months', (req, res)=>{
 })
 app.get('/month/:id', (req, res)=>{
   const{id}=req.parasms;
-  const month = months.find(c => c.id ==id);
+  const month = STORE.months.find(c => c.id ==id);
     if(!month){
       return res.send('Month Required')
     }
@@ -34,7 +31,7 @@ app.get('/results', (req, res)=>{
 })
 app.get('/result/:id', (req, res)=>{
   const{id}=req.parasms;
-  const result = results.find(c => c.id ==id);
+  const result = STORE.results.find(c => c.id ==id);
     if(!result){
       return res.send('result Required')
     }
