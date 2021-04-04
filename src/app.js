@@ -15,7 +15,7 @@ app.use(helmet())
 app.use(cors())
 
 app.get('/', (req, res)=>{
-    res.send('Hello, boilerplate!')
+    res.send('Hello, diabetes-api!')
 })
 app.use(function errorHandler(error, req, res, next){
     let response
