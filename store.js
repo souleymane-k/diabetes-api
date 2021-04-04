@@ -258,3 +258,79 @@ const { v4: uuid } = require('uuid')
   
   
   
+
+  "STORE":[{
+    "months":[
+        {
+            " id":1,
+            "name": "January"
+          },
+          {
+            "id":2,
+            "name": "February"
+          },
+          {
+            "id":3,
+            "name": "March"
+          },
+          {
+           " id":4,
+            "name": "April"
+          },
+          {
+            "id":5,
+            "name": "May"
+          },
+          {
+            "id":6,
+            "name": "June"
+          },
+          {
+           " id":7,
+            "name": "July"
+          },
+          {
+           " id":8,
+            "name": "August"
+          },
+          {
+            "id":9,
+            "name": "September"
+          },
+          {
+            "id":10,
+            "name": "October"
+          },
+          {
+            "id":11,
+            "name": "November"
+          },
+          {
+           " id":12,
+            "name": "December"
+          } 
+
+    ],
+    "results":[
+        {
+            "id": "uuid()",
+            "monthName":"January",
+            "mealName":"Lunch",
+            "result":"110",
+            "date":"01/03/2021",
+           " monthId":1,
+            "description":"take 2hrs after breakfast. 2 bananas",
+           " dtype":"type 1"
+          },
+          {
+           " id": "uuid()",
+            "monthName":"February",
+            "mealName":"Lunch",
+           " result":"110 mg/dl",
+          "  date":"02/03/2021",
+            " monthId":2,
+            "description":"take 2hrs after breakfast. 2 bananas",
+           " dtype":"type 1"
+          }
+    ]
+}]

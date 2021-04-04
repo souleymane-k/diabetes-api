@@ -15,9 +15,9 @@ app.get('/', (req, res)=>{
   res.json(STORE)
 
 })
-app.get('/:months', (req, res)=>{
-  res.json(STORE.months)
-})
+// app.get('/months', (req, res)=>{
+//   res.json(STORE.months)
+// })
 
 app.get('/results', (req, res)=>{
   res.json(STORE.results)
@@ -26,27 +26,27 @@ app.get('/results', (req, res)=>{
 
 /////get months////
 
-// app.get('/months', function getMonths(req, res) {
-//   let response = STORE.months;
+app.get('/months', function getMonths(req, res) {
+  let response = STORE.months;
 
-//   // filter our pokemon by name if name query param is present
-//   if (req.query.name) {
-//     response = response.filter(months =>
-//       // case insensitive searching
-//       months.name.toLowerCase().includes(req.query.name.toLowerCase())
-//     )
-//   }
+  // filter our pokemon by name if name query param is present
+  if (req.query.name) {
+    response = response.filter(months =>
+      // case insensitive searching
+      months.name.toLowerCase().includes(req.query.name.toLowerCase())
+    )
+  }
 
-//   //filter our pokemon by type if type query param is present
-//   if (req.query.types) {
-//     response = response.filter(pokemon =>
-//       pokemon.type.includes(req.query.types)
-//       //req.query.types
-//     )
-//   }
+  //filter our pokemon by type if type query param is present
+  if (req.query.types) {
+    response = response.filter(pokemon =>
+      pokemon.type.includes(req.query.types)
+      //req.query.types
+    )
+  }
 
-//   res.json(response)
-// })
+  res.json(response)
+})
 
 // app.get('/months', (req, res)=>{
 //   res.json('store.months')
