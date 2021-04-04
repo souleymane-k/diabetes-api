@@ -27,7 +27,7 @@ app.get('/months/:monthsId', (req, res)=>{
 app.get('/results', (req, res)=>{
   res.json(STORE.results)
 })
-app.get('/:result_id', (req, res, next)=>{
+app.get('/results/:result_id', (req, res, next)=>{
   let response = STORE.results;
   if (req.query.result_id){
     response = response.filter(results =>
