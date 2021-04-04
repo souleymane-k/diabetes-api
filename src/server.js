@@ -16,9 +16,9 @@ app.get('/months', (req, res)=>{
   res.json(STORE.months)
 
 })
-app.get('/month/:id', (req, res)=>{
-  const{id}=req.parasms;
-  const month = STORE.months.find(c => c.id ==id);
+app.get('/months/:month_id', (req, res)=>{
+  const{month_id}=req.parasms;
+  const month = STORE.months.find(c => c.id ==month_id);
     if(!month){
       return res.send('Month Required')
     }
@@ -29,9 +29,9 @@ app.get('/month/:id', (req, res)=>{
 app.get('/results', (req, res)=>{
   res.json(STORE.results)
 })
-app.get('/result/:id', (req, res)=>{
-  const{id}=req.parasms;
-  const result = STORE.results.find(c => c.id ==id);
+app.get('/results/:result_id', (req, res)=>{
+  const{result_id}=req.parasms;
+  const result = STORE.results.find(c => c.id ==result_id);
     if(!result){
       return res.send('result Required')
     }
