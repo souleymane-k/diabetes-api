@@ -23,7 +23,6 @@ app.get('/months/:month_id', (req, res)=>{
       return res.send('Month Required')
     }
   res.json(month)
-  // res.json(STORE.results)
 })
 
 app.get('/results', (req, res)=>{
@@ -39,25 +38,7 @@ app.get('/results/:result_id', (req, res)=>{
   // res.json(STORE.results)
 })
 
-// app.get('/results/:result_id', (req, res, next)=>{
-//   let response = STORE.results;
-//   if (req.query.result_id){
-//     response = response.filter(results =>
-//       // case insensitive searching
-//       results.name.toLowerCase().includes(req.query.name.toLowerCase())
-//     )
-//   }
-
-//       req.app.get(STORE.results),
-//       req.params.folder_id
-
-//   // res.send(req.params)
-//   // res.json(STORE.results)
-//   res.json(result_id)
-// })
-
-
-/////get months////
+/
 
 app.get('/months', function getMonths(req, res) {
   let response = STORE.months;
