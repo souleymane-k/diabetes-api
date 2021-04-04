@@ -19,30 +19,45 @@ app.get('/months', (req, res)=>{
   res.json(STORE.months)
 
 })
-app.get('/months/:id', (req, res)=>{
-  res.send(req.params)
+app.get('/month/:id', (req, res)=>{
+  const{id}=req.parasms;
+  const month = months.find(c => c.id ==id);
+    if(!month){
+      return res.send('Month Required')
+    }
+  res.json(month)
   // res.json(STORE.results)
 })
 
 app.get('/results', (req, res)=>{
   res.json(STORE.results)
 })
-app.get('/results/:result_id', (req, res, next)=>{
-  let response = STORE.results;
-  if (req.query.result_id){
-    response = response.filter(results =>
-      // case insensitive searching
-      results.name.toLowerCase().includes(req.query.name.toLowerCase())
-    )
-  }
-
-      req.app.get(STORE.results),
-      req.params.folder_id
-
-  // res.send(req.params)
+app.get('/result/:id', (req, res)=>{
+  const{id}=req.parasms;
+  const result = results.find(c => c.id ==id);
+    if(!result){
+      return res.send('result Required')
+    }
+  res.json(result)
   // res.json(STORE.results)
-  res.json(result_id)
 })
+
+// app.get('/results/:result_id', (req, res, next)=>{
+//   let response = STORE.results;
+//   if (req.query.result_id){
+//     response = response.filter(results =>
+//       // case insensitive searching
+//       results.name.toLowerCase().includes(req.query.name.toLowerCase())
+//     )
+//   }
+
+//       req.app.get(STORE.results),
+//       req.params.folder_id
+
+//   // res.send(req.params)
+//   // res.json(STORE.results)
+//   res.json(result_id)
+// })
 
 
 /////get months////
