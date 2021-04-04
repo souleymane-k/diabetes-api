@@ -10,7 +10,7 @@ const express = require('express');
   res.send('Hello, diabetes-api!')
 })
 app.get('/months', (req, res)=>{
-  res.json('store.months')
+  res.send('store.months')
 })
 
 //  app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
