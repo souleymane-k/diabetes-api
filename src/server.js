@@ -16,6 +16,9 @@ const express = require('express');
 app.get('/months', (req, res)=>{
   res.json(store)
 })
+app.get('/:months', (req, res)=>{
+  res.json(store)
+})
 
 
 /////get months////
