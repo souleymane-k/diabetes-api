@@ -9,16 +9,18 @@ const express = require('express');
 
 //  app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 
- module.exports = {app};
+//  module.exports = {app};
 
 
 
 
 
 
-const app = require('./app')
+// const app = require('./app')
 const { PORT } = require('./config')
 
 app.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}`)
 })
+
+module.exports = {app};
