@@ -1,6 +1,6 @@
 const express = require('express');
  const app = express();
- const store = require('../store.json')
+ const STORE = require('../store.json')
 
 //  const PORT = process.env.PORT || 3000;
 
@@ -14,10 +14,10 @@ const express = require('express');
   res.send('Hello, diabetes-api!')
 })
 app.get('/months', (req, res)=>{
-  res.json(store.months)
+  res.json(STORE.months)
 })
 app.get('/:months', (req, res)=>{
-  res.json(store)
+  res.json(STORE)
 })
 
 
