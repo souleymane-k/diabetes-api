@@ -39,8 +39,9 @@ app.get('/results/:result_id', (req, res, next)=>{
       req.app.get(STORE.results),
       req.params.folder_id
 
-  res.send(req.params)
+  // res.send(req.params)
   // res.json(STORE.results)
+  res.json(result_id)
 })
 
 
