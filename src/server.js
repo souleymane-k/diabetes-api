@@ -14,31 +14,31 @@ app.get('/', (req, res)=>{
 })
 app.get('/months', (req, res)=>{
   res.json(STORE.months)
-
 })
+
+app.get('/results', (req, res)=>{
+  res.json(STORE.results)
+})
+
 app.get('/months/:month_id', (req, res)=>{
   const{month_id}=req.parasms;
-  const month = STORE.months.find(c => c.id ==month_id);
+  const month = STORE.months.find(m => m.id ==month_id);
     if(!month){
       return res.send('Month Required')
     }
   res.json(month)
 })
 
-app.get('/results', (req, res)=>{
-  res.json(STORE.results)
-})
 app.get('/results/:result_id', (req, res)=>{
   const{result_id}=req.parasms;
-  const result = STORE.results.find(c => c.id ==result_id);
+  const result = STORE.results.find(r => r.id ==result_id);
     if(!result){
       return res.send('result Required')
     }
   res.json(result)
-  // res.json(STORE.results)
 })
 
-/
+
 
 app.get('/months', function getMonths(req, res) {
   let response = STORE.months;
@@ -61,17 +61,6 @@ app.get('/months', function getMonths(req, res) {
 
   res.json(response)
 })
-
-// app.get('/months', (req, res)=>{
-//   res.json('store.months')
-// })
-
-//  app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
-
-//  module.exports = {app};
-
-
-
 
 
 
