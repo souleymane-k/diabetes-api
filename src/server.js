@@ -27,7 +27,18 @@ app.get('/months/:monthsId', (req, res)=>{
 app.get('/results', (req, res)=>{
   res.json(STORE.results)
 })
-app.get('/results/:resultsId', (req, res)=>{
+app.get('/:result_id', (req, res, next)=>{
+  let response = STORE.results;
+  if (req.query.result_id){
+    response = response.filter(results =>
+      // case insensitive searching
+      results.name.toLowerCase().includes(req.query.name.toLowerCase())
+    )
+  }
+
+      req.app.get(STORE.results),
+      req.params.folder_id
+
   res.send(req.params)
   // res.json(STORE.results)
 })
