@@ -13,9 +13,9 @@ const express = require('express');
  app.get('/', (req, res)=>{
   res.send('Hello, diabetes-api!')
 })
-app.get('/months', (req, res)=>{
-  res.json(STORE.months)
-})
+// app.get('/months', (req, res)=>{
+//   res.json(STORE.months)
+// })
 app.get('/:months', (req, res)=>{
   res.json(STORE)
 })
@@ -23,8 +23,8 @@ app.get('/:months', (req, res)=>{
 
 /////get months////
 
-app.get('', function handleMonths(req, res) {
-  let response = store.months;
+app.get('/months', function handleMonths(req, res) {
+  let response = STORE.months;
 
   // filter our pokemon by name if name query param is present
   if (req.query.name) {
@@ -35,12 +35,12 @@ app.get('', function handleMonths(req, res) {
   }
 
   // filter our pokemon by type if type query param is present
-  if (req.query.types) {
-    response = response.filter(pokemon =>
-      pokemon.type.includes(req.query.types)
-      //req.query.types
-    )
-  }
+  // if (req.query.types) {
+  //   response = response.filter(pokemon =>
+  //     pokemon.type.includes(req.query.types)
+  //     //req.query.types
+  //   )
+  // }
 
   res.json(response)
 })
