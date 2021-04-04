@@ -58,7 +58,7 @@
             "mealName":"Lunch",
             "result":"110",
             "date":"01/03/2021",
-           " monthId":"1",
+           " monthId":1,
             "description":"take 2hrs after breakfast. 2 bananas",
            " dtype":"type 1"
           },
@@ -68,7 +68,7 @@
             "mealName":"Lunch",
            " result":"110 mg/dl",
           "  date":"02/03/2021",
-            " monthId":"2",
+            " monthId":2,
             "description":"take 2hrs after breakfast. 2 bananas",
            " dtype":"type 1"
           }
