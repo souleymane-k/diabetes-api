@@ -9,6 +9,9 @@ const express = require('express');
  app.get('/', (req, res)=>{
   res.send('Hello, diabetes-api!')
 })
+app.get('/months', (req, res)=>{
+  res.json('store.months')
+})
 
 //  app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 
