@@ -13,9 +13,9 @@ const express = require('express');
  app.get('/', (req, res)=>{
   res.send('Hello, diabetes-api!')
 })
-// app.get('/months', (req, res)=>{
-//   res.json(STORE.months)
-// })
+app.get('/months', (req, res)=>{
+  res.json(STORE.months)
+})
 app.get('/:months', (req, res)=>{
   res.json(STORE.months)
 })
