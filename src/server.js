@@ -20,14 +20,16 @@ app.get('/months', (req, res)=>{
 
 })
 app.get('/months/:monthsId', (req, res)=>{
-  res.json(STORE.results)
+  res.send(req.params)
+  // res.json(STORE.results)
 })
 
 app.get('/results', (req, res)=>{
   res.json(STORE.results)
 })
 app.get('/results/:resultsId', (req, res)=>{
-  res.json(STORE.results)
+  res.send(req.params)
+  // res.json(STORE.results)
 })
 
 
