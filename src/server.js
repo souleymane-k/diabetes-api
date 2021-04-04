@@ -7,9 +7,9 @@ const express = require('express');
    res.json({ok: true});
  });
 
- app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+//  app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 
- module.exports = {app};
+//  module.exports = {app};
 
 
 
