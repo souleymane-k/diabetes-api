@@ -19,7 +19,7 @@ app.get('/months', (req, res)=>{
   res.json(STORE.months)
 
 })
-app.get('/months/:monthsId', (req, res)=>{
+app.get('/months/:id', (req, res)=>{
   res.send(req.params)
   // res.json(STORE.results)
 })
