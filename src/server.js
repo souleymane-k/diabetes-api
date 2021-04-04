@@ -25,7 +25,7 @@ app.get('/results', (req, res)=>{
 
 /////get months////
 
-app.get('/months', function handleMonths(req, res) {
+app.get('/months', function getMonths(req, res) {
   let response = STORE.months;
 
   // filter our pokemon by name if name query param is present
@@ -36,13 +36,13 @@ app.get('/months', function handleMonths(req, res) {
     )
   }
 
-  // filter our pokemon by type if type query param is present
-  // if (req.query.types) {
-  //   response = response.filter(pokemon =>
-  //     pokemon.type.includes(req.query.types)
-  //     //req.query.types
-  //   )
-  // }
+  //filter our pokemon by type if type query param is present
+  if (req.query.types) {
+    response = response.filter(pokemon =>
+      pokemon.type.includes(req.query.types)
+      //req.query.types
+    )
+  }
 
   res.json(response)
 })
