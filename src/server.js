@@ -13,9 +13,14 @@ const express = require('express');
  app.get('/', (req, res)=>{
   res.send('Hello, diabetes-api!')
 })
+app.get('/months', (req, res)=>{
+  res.json(store.months)
+})
+
+
 /////get months////
 
-app.get('/months', function handleMonths(req, res) {
+app.get('', function handleMonths(req, res) {
   let response = store.months;
 
   // filter our pokemon by name if name query param is present
