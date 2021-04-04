@@ -6,12 +6,39 @@ const express = require('express');
  app.get('/api/*', (req, res) => {
    res.json({ok: true});
  });
+
+
+
  app.get('/', (req, res)=>{
   res.send('Hello, diabetes-api!')
 })
-app.get('/months', (req, res)=>{
-  res.json('store.months')
+/////get months////
+
+app.get('/months', function handleMonths(req, res) {
+  let response = store.months;
+
+  // filter our pokemon by name if name query param is present
+  if (req.query.name) {
+    response = response.filter(months =>
+      // case insensitive searching
+      months.name.toLowerCase().includes(req.query.name.toLowerCase())
+    )
+  }
+
+  // filter our pokemon by type if type query param is present
+  if (req.query.types) {
+    response = response.filter(pokemon =>
+      pokemon.type.includes(req.query.types)
+      //req.query.types
+    )
+  }
+
+  res.json(response)
 })
+
+// app.get('/months', (req, res)=>{
+//   res.json('store.months')
+// })
 
 //  app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 
