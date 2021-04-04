@@ -15,14 +15,17 @@ app.get('/', (req, res)=>{
   res.json(STORE)
 
 })
-// app.get('/months', (req, res)=>{
-//   res.json(STORE.months)
-// })
+app.get('/months', (req, res)=>{
+  res.json(STORE.months)
+})
 
 app.get('/results', (req, res)=>{
   res.json(STORE.results)
 })
 app.get('/:months', (req, res)=>{
+  res.json(STORE.results)
+})
+app.get('/:results', (req, res)=>{
   res.json(STORE.results)
 })
 
