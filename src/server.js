@@ -8,11 +8,12 @@ const express = require('express');
    res.json({ok: true});
  });
 
- app.get('/', (req, res)=>{
-  res.send('Hello, diabetes-api!')
-})
-app.get('/months', (req, res)=>{
+//  app.get('/', (req, res)=>{
+//   res.send('Hello, diabetes-api!')
+// })
+app.get('/', (req, res)=>{
   res.json(STORE)
+
 })
 app.get('/:months', (req, res)=>{
   res.json(STORE.months)
