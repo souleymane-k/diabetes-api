@@ -3,6 +3,9 @@ const express = require('express');
  const STORE = require('../store.json')
  const { PORT } = require('./config')
 
+
+ app.use(express.json());
+
 //  const PORT = process.env.PORT || 3000;
 
  app.get('/api/*', (req, res) => {
