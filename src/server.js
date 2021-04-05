@@ -22,7 +22,7 @@ app.get('/results', (req, res)=>{
 
 app.get('/months/:month_id', (req, res)=>{
   const{month_id}=req.parasms;
-  const month = STORE.months.find(m => m.id ==month_id);
+  const month = STORE.months.map(m => m.id ==month_id);
     if(!month){
       return res.send('Month Required')
     }
@@ -31,7 +31,7 @@ app.get('/months/:month_id', (req, res)=>{
 
 app.get('/results/:result_id', (req, res)=>{
   const{result_id}=req.parasms;
-  const result = STORE.results.find(r => r.id ==result_id);
+  const result = STORE.results.map(r => r.id ==result_id);
     if(!result){
       return res.send('result Required')
     }
