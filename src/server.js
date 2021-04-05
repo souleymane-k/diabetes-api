@@ -5,7 +5,7 @@ const express = require('express');
 
 
  app.use(express.json());
- app.use('/api', Anyroute)
+//  app.use('/api', Anyroute)
 
 //  const PORT = process.env.PORT || 3000;
 
