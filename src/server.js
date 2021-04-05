@@ -1,5 +1,4 @@
 const express = require('express');
-const winston = require('winston');
  const app = express();
  const STORE = require('../store.json')
  const { PORT } = require('./config')
@@ -48,19 +47,6 @@ app.get('/results/:id', (req, res)=>{
 
 
 
-const logger = winston.createLogger({
-  level: 'info',
-  format: winston.format.json(),
-  transports: [
-    new winston.transports.File({ filename: 'info.log' })
-  ]
-});
-
-if (NODE_ENV !== 'production') {
-  logger.add(new winston.transports.Console({
-    format: winston.format.simple()
-  }));
-}
 
 
 
