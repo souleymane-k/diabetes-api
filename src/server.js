@@ -30,9 +30,9 @@ app.get('/months/:month_id', (req, res)=>{
   res.json(month)
 })
 
-app.get('/results/:result_id', (req, res)=>{
-  const{result_id}=req.parasms;
-  const result = STORE.results.find(r => r.id ==result_id);
+app.get('/results/:id', (req, res)=>{
+  const{id}=req.parasms;
+  const result = STORE.results.find(r => r.id ==id);
     if(!result){
       return res.send('result Required')
     }
