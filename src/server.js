@@ -61,17 +61,30 @@ app.get('/', (req, res)=>{
 
 })
 app.get('/month', (req, res)=>{
-  res.json(months)
+  res.json(STORE.months)
 })
 
-app.get('/api/result', (req, res)=>{
+app.get('/result', (req, res)=>{
   res.json(STORE.results)
 })
 
-app.get('/api/month/:id', (req, res)=>{
+app.get('/result/:id', (req, res)=>{
+  const{id}=req.parasms.id;
+  const result = STORE.results.find(m => m.id ==id);
+  // make sure we found a month
+    if(!result){
+      logger.error(`Month with id ${id} not found.`);
+      return res
+      .status(404)
+      .send('Result  Required');
+    }
+  res.json(result);
+});
+
+
+app.get('/month/:id', (req, res)=>{
   const{id}=req.parasms.id;
   const month = STORE.months.find(m => m.id ==id);
-
   // make sure we found a month
     if(!month){
       logger.error(`Month with id ${id} not found.`);
