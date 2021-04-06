@@ -17,11 +17,11 @@ app.get('/', (req, res)=>{
   res.json(STORE)
 
 })
-app.get('/months', (req, res)=>{
+app.get('/month', (req, res)=>{
   res.json(STORE.months)
 })
 
-app.get('/results', (req, res)=>{
+app.get('/result', (req, res)=>{
   res.json(STORE.results)
 })
 
