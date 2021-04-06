@@ -1,10 +1,12 @@
+require('dotenv').config()
 const express = require('express');
- const app = express();
+const morgan = require('morgan')
  const STORE = require('../store.json')
  const { PORT } = require('./config')
  const cors = require('cors')
 
 
+ const app = express();
 
  app.use(express.json());
 
