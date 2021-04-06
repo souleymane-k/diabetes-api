@@ -25,9 +25,9 @@ app.get('/results', (req, res)=>{
   res.json(STORE.results)
 })
 
-app.get('/months/:month_id', (req, res)=>{
-  const{month_id}=req.parasms;
-  const month = STORE.months.find(m => m.id ==month_id);
+app.get('/months/:id', (req, res)=>{
+  const{id}=req.parasms;
+  const month = STORE.months.find(m => m.id ===id);
     if(!month){
       return res.send('Month Required')
     }
