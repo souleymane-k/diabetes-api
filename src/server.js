@@ -52,17 +52,17 @@ app.get('/month/:id', (req, res)=>{
     if(!month){
       return res.send('Month Required')
     }
-  res.json(month)
-})
+  res.json(month);
+});
 
-app.get('/result/:id', (req, res)=>{
-  const {id} =req.parasms;
-  const result = STORE.results.find(r => r.id ==id);
-    if(!result){
-      return res.send('result Required')
-    }
-  res.json(result)
-})
+// app.get('/result/:id', (req, res)=>{
+//   const {id} =req.parasms;
+//   const result = STORE.results.find(r => r.id ==id);
+//     if(!result){
+//       return res.send('result Required')
+//     }
+//   res.json(result)
+// })
 
 
 
