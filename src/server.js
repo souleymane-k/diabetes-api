@@ -25,7 +25,7 @@ app.get('/result', (req, res)=>{
   res.json(STORE.results)
 })
 
-app.get('/months/:id', (req, res)=>{
+app.get('/month/:id', (req, res)=>{
   const{id}=req.parasms;
   const month = STORE.months.find(m => m.id ===id);
     if(!month){
@@ -34,7 +34,7 @@ app.get('/months/:id', (req, res)=>{
   res.json(month)
 })
 
-app.get('/results/:id', (req, res)=>{
+app.get('/result/:id', (req, res)=>{
   const {id} =req.parasms;
   const resul = STORE.results.find(r => r.id ==id);
     if(!resul){
