@@ -2,26 +2,46 @@ const express = require('express');
  const app = express();
  const STORE = require('../store.json')
  const { PORT } = require('./config')
+ const cors = require('cors')
+
 
 
  app.use(express.json());
-//  app.use('/api', Anyroute)
 
-//  const PORT = process.env.PORT || 3000;
 
-const months = [
-{
-  "id":1,
-  "name":"January"
-},
-{
-  "id":2,
-  "name":"February"
-},
-{
-  "id":3,
-  "name":"March"
-}]
+ const morganSetting = process.env.NODE_ENV === 'production' ? 'tiny': 'common'
+  app.use(morgan(morganSetting))
+  app.use(cors())
+
+  app.use(function validateBearerToken(req, res, next) {
+    const apiToken = process.env.API_TOKEN
+    
+    const authToken = req.get("Authorization")
+    console.log(apiToken)
+    console.log(authToken)
+  
+    if (!authToken || authToken.split(' ')[1] !== apiToken) {
+      return res.status(401).json({ error: 'Unauthorized request' })
+    }
+    // move to the next middleware
+    next()
+  })
+
+
+
+// const months = [
+// {
+//   "id":1,
+//   "name":"January"
+// },
+// {
+//   "id":2,
+//   "name":"February"
+// },
+// {
+//   "id":3,
+//   "name":"March"
+// }]
 
 
 
@@ -48,7 +68,7 @@ app.get('/result', (req, res)=>{
 
 app.get('/month/:id', (req, res)=>{
   const{id}=req.parasms.id;
-  const month = months.find(m => m.id ==id);
+  const month = STORE.months.find(m => m.id ==id);
 
   // make sure we found a month
     if(!month){
@@ -69,11 +89,16 @@ app.get('/month/:id', (req, res)=>{
 //   res.json(result)
 // })
 
-
-
-
-
-
+// 4 parameters in middleware, express knows to treat this as error handler
+app.use((error, req, res, next) => {
+  let response
+  if (process.env.NODE_ENV === 'production') {
+    response = { error: { message: 'server error' }}
+  } else {
+    response = { error }
+  }
+  res.status(500).json(response)
+})
 
 
 app.listen(PORT, () => {
@@ -103,3 +128,17 @@ module.exports = {app};
 //       //req.query.types
 //     )
 //   }
+
+// const months = [
+// {
+//   "id":1,
+//   "name":"January"
+// },
+// {
+//   "id":2,
+//   "name":"February"
+// },
+// {
+//   "id":3,
+//   "name":"March"
+// }]
