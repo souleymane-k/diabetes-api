@@ -15,7 +15,15 @@ describe('GET /months', () => {
     return supertest(app)
       .get('/months')
       .expect(200)
-      .expect('Content-Type', /json/);
+      .expect('Content-Type', /json/)
+      .then(res=>{
+        expect(res.body).to.be.an('array');
+        expect(res.body).to.have.lengthOf.at.least(1);
+        const month = res.body[0];
+        expect(month).to.include.all.keys(
+                   'name'
+                 );
+      })
   })
 });
 
@@ -24,6 +32,15 @@ describe('GET /results', () => {
     return supertest(app)
       .get('/results')
       .expect(200)
-      .expect('Content-Type', /json/);
+      .expect('Content-Type', /json/)
+      .then(res=>{
+        expect(res.body).to.be.an('array');
+        expect(res.body).to.have.lengthOf.at.least(1);
+        const result = res.body[0];
+        expect(result).to.include.all.keys(
+                   'monthName','mealName','result','monthId:','description',' dtype'
+                 );
+      })
   })
 });
+
