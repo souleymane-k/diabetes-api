@@ -69,7 +69,7 @@ app.get('/results', (req, res)=>{
 })
 
 app.get('/results/:result_id', (req, res)=>{
-  const{result_id}=req.parasms.result_id;
+  const{result_id}=req.params;
   const result = STORE.results.find(m => m.id ==result_id);
   // make sure we found a month
     if(!result){
@@ -83,7 +83,7 @@ app.get('/results/:result_id', (req, res)=>{
 
 
 app.get('/months/:month_id', (req, res)=>{
-  const{month_id}=req.parasms.id;
+  const{month_id}=req.params;
   const month = STORE.months.find(m => m.id ==month_id);
   // make sure we found a month
     if(!month){
