@@ -49,8 +49,13 @@ app.get('/result', (req, res)=>{
 app.get('/month/:id', (req, res)=>{
   const{id}=req.parasms;
   const month = months.find(m => m.id ==id);
+
+  // make sure we found a month
     if(!month){
-      return res.send('Month Required')
+      logger.error(`Month with id ${id} not found.`);
+      return res
+      .status(404)
+      .send('Month  Required');
     }
   res.json(month);
 });
