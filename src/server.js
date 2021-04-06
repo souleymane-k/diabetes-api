@@ -15,19 +15,19 @@ const morgan = require('morgan')
   app.use(morgan(morganSetting))
   app.use(cors())
 
-  app.use(function validateBearerToken(req, res, next) {
-    const apiToken = process.env.API_TOKEN
+  // app.use(function validateBearerToken(req, res, next) {
+  //   const apiToken = process.env.API_TOKEN
     
-    const authToken = req.get("Authorization")
-    console.log(apiToken)
-    console.log(authToken)
+  //   const authToken = req.get("Authorization")
+  //   console.log(apiToken)
+  //   console.log(authToken)
   
-    if (!authToken || authToken.split(' ')[1] !== apiToken) {
-      return res.status(401).json({ error: 'Unauthorized request' })
-    }
-    // move to the next middleware
-    next()
-  })
+  //   if (!authToken || authToken.split(' ')[1] !== apiToken) {
+  //     return res.status(401).json({ error: 'Unauthorized request' })
+  //   }
+  //   // move to the next middleware
+  //   next()
+  // })
 
 
 
@@ -60,15 +60,15 @@ app.get('/', (req, res)=>{
   res.json(STORE)
 
 })
-app.get('/month', (req, res)=>{
+app.get('/api/month', (req, res)=>{
   res.json(months)
 })
 
-app.get('/result', (req, res)=>{
+app.get('/api/result', (req, res)=>{
   res.json(STORE.results)
 })
 
-app.get('/month/:id', (req, res)=>{
+app.get('/api/month/:id', (req, res)=>{
   const{id}=req.parasms.id;
   const month = STORE.months.find(m => m.id ==id);
 
