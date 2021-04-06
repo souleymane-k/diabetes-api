@@ -60,7 +60,7 @@ app.get('/', (req, res)=>{
   res.json(STORE)
 
 })
-app.get('/api/month', (req, res)=>{
+app.get('/month', (req, res)=>{
   res.json(months)
 })
 
