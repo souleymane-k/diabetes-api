@@ -87,7 +87,7 @@ app.get('/months/:month_id', (req, res)=>{
   const month = STORE.months.find(m => m.id ==month_id);
   // make sure we found a month
     if(!month){
-      logger.error(`Month with id ${id} not found.`);
+      logger.error(`Month with id ${month_id} not found.`);
       return res
       .status(404)
       .send('Month  Required');
