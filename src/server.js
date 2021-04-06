@@ -9,6 +9,27 @@ const express = require('express');
 
 //  const PORT = process.env.PORT || 3000;
 
+const months = [
+{
+  "id":1,
+  "name":"January"
+},
+{
+  "id":2,
+  "name":"February"
+},
+{
+  "id":3,
+  "name":"March"
+}]
+
+
+
+
+
+
+
+
  app.get('/api/*', (req, res) => {
    res.json({ok: true});
  });
@@ -18,7 +39,7 @@ app.get('/', (req, res)=>{
 
 })
 app.get('/month', (req, res)=>{
-  res.json(STORE.months)
+  res.json(months)
 })
 
 app.get('/result', (req, res)=>{
