@@ -11,7 +11,7 @@ describe('App', () => {
 
 })
 describe('GET /months', () => {
-  it('should return an array of months', () => {
+  it('should return an object of months', () => {
     return supertest(app)
       .get('/months')
       .expect(200)
@@ -20,7 +20,7 @@ describe('GET /months', () => {
 });
 
 describe('GET /results', () => {
-  it('should return an array of results', () => {
+  it('should return an object of results', () => {
     return supertest(app)
       .get('/results')
       .expect(200)
