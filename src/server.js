@@ -79,18 +79,25 @@ app.get('/months/:month_id', (req, res)=>{
 
 app.post(jsonParser, (req, res, next)=>{
  const {monthName, mealName, result, date,monthId,description,dtype} = req.body
-const ReqInput = { id: uuid(), monthName, mealName, result, date,monthId,description,dtype }
+const newResult = { id: uuid(), monthName, mealName, result, date,monthId,description,dtype }
 
-STORE.results.push(ReqInput)
+STORE.results.push(newResult)
+.then(result => {
+  res
+    .status(201)
+    .location(path.posix.join(req.originalUrl, `/${result.id}`))
+    .json(result)
+})
+.catch(next)
 
-logger.info(`Result with id ${result.id} created`)
-    res
-      .status(201)
-      .location(`http://localhost:8001/results/${result.id}`)
-      .json(ReqInput)
-      .json(results)
 
-   .catch(next)
+// logger.info(`Result with id ${result.id} created`)
+//     res
+//       .status(201)
+//       .location(`http://localhost:8001/results/${result.id}`)
+//       .json(ReqInput)
+
+//    .catch(next)
 })
 
 app.delete('/results/:result_id', (req, res)=>{
