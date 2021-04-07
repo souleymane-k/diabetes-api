@@ -6,6 +6,7 @@ const morgan = require('morgan')
 const { v4: uuid } = require('uuid');
  const cors = require('cors')
  const bodyParser = express.json()
+ const jsonParser = express.json()
 
  const app = express();
 
@@ -102,7 +103,7 @@ app.get('/months/:month_id', (req, res)=>{
 // })
 
 
-app.post(bodyParser, (req, res)=>{
+app.post(jsonParser, (req, res)=>{
   for(const field of ['monthName','mealName','result','date','monthId','description','dtype']){
     if (!req.body[field]) {
       logger.error(`${field} is required`)
