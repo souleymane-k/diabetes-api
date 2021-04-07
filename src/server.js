@@ -3,7 +3,7 @@ const express = require('express');
 const morgan = require('morgan')
  const STORE = require('../store.json')
  const { PORT } = require('./config')
-//  const { v4: uuid } = require('uuid');
+const { v4: uuid } = require('uuid');
  const cors = require('cors')
  const bodyParser = express.json()
 
