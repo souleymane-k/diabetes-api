@@ -108,7 +108,7 @@ STORE.results.push(newResult)
 })
 
 app.delete('/results/:result_id', (req, res)=>{
-  const{result_id}= req.params
+  const{result_id}= req.params;
 
   const resultIndex = STORE.results.findIndex(r =>r.id === result_id) 
   
@@ -119,7 +119,8 @@ app.delete('/results/:result_id', (req, res)=>{
       .send('Result Not Found')
   }
  
-  STORE.results.splice(resultIndex, 1)
+  // STORE.results.splice(resultIndex, 1)
+  results.splice(resultIndex, 1)
 
   logger.info(`result with id ${result_id} deleted.`)
     res
