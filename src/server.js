@@ -88,13 +88,15 @@ for (const [key, value] of Object.entries(newResult))
         })
 
 STORE.results.push(newResult)
-.then(result => {
-  res
-    .status(201)
-    .location(path.posix.join(req.originalUrl, `/${result.id}`))
-    .json(result)
-})
-.catch(next)
+// .then(result => {
+//   res
+//     .status(201)
+//     .location(path.posix.join(req.originalUrl, `/${result.id}`))
+//     .json(result)
+// })
+// .catch(next)
+res.status(201)
+    .json(newResult);
 
 
 // logger.info(`Result with id ${result.id} created`)
