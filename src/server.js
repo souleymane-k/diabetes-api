@@ -32,28 +32,6 @@ const { v4: uuid } = require('uuid');
   // })
 
 
-
-// const months = [
-// {
-//   "id":1,
-//   "name":"January"
-// },
-// {
-//   "id":2,
-//   "name":"February"
-// },
-// {
-//   "id":3,
-//   "name":"March"
-// }]
-
-
-
-
-
-
-
-
  app.get('/api/*', (req, res) => {
    res.json({ok: true});
  });
@@ -128,7 +106,7 @@ app.delete('/results/:result_id', (req, res)=>{
  
   store.results.splice(resultIndex, 1)
 
-  logger.info(`Bookmark with id ${bookmark_id} deleted.`)
+  logger.info(`Bookmark with id ${result_id} deleted.`)
     res
       .status(204)
       .end()
