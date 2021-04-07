@@ -123,10 +123,10 @@ app.delete('/results/:result_id', (req, res)=>{
  
   STORE.results.splice(resultIndex, 1)
   
-  // logger.info(`result with id ${result_id} deleted.`)
-  //   res
-  //     .status(204)
-  //     .end()
+  logger.info(`result with id ${result_id} deleted.`)
+    res
+      .status(204)
+      .end()
 
 })
 
