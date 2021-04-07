@@ -104,51 +104,18 @@ app.get('/months/:month_id', (req, res)=>{
 
 
 app.post(jsonParser, (req, res)=>{
-  // for(const field of ['monthName','mealName','result','date','monthId','description','dtype']){
-  //   if (!req.body[field]) {
-  //     logger.error(`${field} is required`)
-  //     return res.status(400).send(`'${field}' is required`)
-  // }
-// }
+  
  const {monthName, mealName, result, date,monthId,description,dtype} = req.body
 
-// if (!monthName) {
-//   logger.error(`Invalid monthName '${monthName}' is required`)
-//   return res.status(400).send(`'monthName' is required`)
-// }
-// if (!mealhName) {
-//   logger.error(`Invalid monthName '${mealName}' is required`)
-//   return res.status(400).send(`'mealName' is required`)
-// }
-// if (!Number.isInteger(result) || result < 0 || result > 500) {
-//   logger.error(`Invalid result '${result}' supplied`)
-//   return res.status(400).send(`'result' must be a number between 60 and 400`)
-// }
-// if (!date) {
-//   logger.error(`Invalid date '${date}' is required`)
-//   return res.status(400).send(`'date' is required`)
-// }
-// if (!Number.isInteger(monthId) || monthId < 1 || rating > 12) {
-//   logger.error(`Invalid monthId '${monthId}' supplied`)
-//   return res.status(400).send(`'monthId' must be a number between 1 and 12`)
-// }
-// if (!description) {
-//   logger.error(`Invalid description '${description}' is required`)
-//   return res.status(400).send(`'description' is required`)
-// }
-// if (!dtype) {
-//   logger.error(`Invalid dtype '${dtype}' is required`)
-//   return res.status(400).send(`'dtype' is required`)
-// }
-const input = { id: uuid(), monthName, mealName, result, date,monthId,description,dtype }
+const ReqInput = { id: uuid(), monthName, mealName, result, date,monthId,description,dtype }
 
-STORE.results.push(input)
+STORE.results.push(ReqInput)
 
 logger.info(`Result with id ${result.id} created`)
     res
       .status(201)
       .location(`http://localhost:8001/results/${result.id}`)
-      .json(input)
+      .json(ReqInput)
 
 
 })
@@ -210,3 +177,42 @@ module.exports = {app};
 //   "id":3,
 //   "name":"March"
 // }]
+
+
+// for(const field of ['monthName','mealName','result','date','monthId','description','dtype']){
+  //   if (!req.body[field]) {
+  //     logger.error(`${field} is required`)
+  //     return res.status(400).send(`'${field}' is required`)
+  // }
+// }
+
+
+
+// if (!monthName) {
+//   logger.error(`Invalid monthName '${monthName}' is required`)
+//   return res.status(400).send(`'monthName' is required`)
+// }
+// if (!mealhName) {
+//   logger.error(`Invalid monthName '${mealName}' is required`)
+//   return res.status(400).send(`'mealName' is required`)
+// }
+// if (!Number.isInteger(result) || result < 0 || result > 500) {
+//   logger.error(`Invalid result '${result}' supplied`)
+//   return res.status(400).send(`'result' must be a number between 60 and 400`)
+// }
+// if (!date) {
+//   logger.error(`Invalid date '${date}' is required`)
+//   return res.status(400).send(`'date' is required`)
+// }
+// if (!Number.isInteger(monthId) || monthId < 1 || rating > 12) {
+//   logger.error(`Invalid monthId '${monthId}' supplied`)
+//   return res.status(400).send(`'monthId' must be a number between 1 and 12`)
+// }
+// if (!description) {
+//   logger.error(`Invalid description '${description}' is required`)
+//   return res.status(400).send(`'description' is required`)
+// }
+// if (!dtype) {
+//   logger.error(`Invalid dtype '${dtype}' is required`)
+//   return res.status(400).send(`'dtype' is required`)
+// }
