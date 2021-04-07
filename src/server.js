@@ -88,6 +88,7 @@ logger.info(`Result with id ${result.id} created`)
       .status(201)
       .location(`http://localhost:8001/results/${result.id}`)
       .json(ReqInput)
+      .json(results)
 
    .catch(next)
 })
