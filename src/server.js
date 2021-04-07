@@ -127,7 +127,7 @@ app.delete('/results/:result_id', (req, res)=>{
   console.log(`result with id ${result_id} not found.`)
   return res 
   .status(204)
-   end()
+  end()
   // logger.info(`result with id ${result_id} deleted.`)
   //   res
   //     .status(204)
