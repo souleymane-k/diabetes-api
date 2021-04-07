@@ -139,6 +139,16 @@ if (!dtype) {
   logger.error(`Invalid dtype '${dtype}' is required`)
   return res.status(400).send(`'dtype' is required`)
 }
+const result = { id: uuid(), monthName, mealName, result, date,monthId,description,dtype }
+
+STORE.results.push(result)
+
+logger.info(`Result with id ${result.id} created`)
+    res
+      .status(201)
+      .location(`http://localhost:8001/results/${result.id}`)
+      .json(result)
+
 
 })
 
