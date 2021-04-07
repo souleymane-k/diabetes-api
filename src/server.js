@@ -109,8 +109,8 @@ res.status(201)
 })
 
 app.delete('/results/:result_id', (req, res)=>{
-  const{result_id} = req.params;
 
+  const{result_id} = req.params;
   const resultIndex = STORE.results.findIndex(r =>r.id === result_id) 
   
   if (resultIndex === -1) {
@@ -125,9 +125,9 @@ app.delete('/results/:result_id', (req, res)=>{
 
 
   console.log(`result with id ${result_id} not found.`)
-  res 
+  return res 
   .status(204)
-  end()
+   end()
   // logger.info(`result with id ${result_id} deleted.`)
   //   res
   //     .status(204)
