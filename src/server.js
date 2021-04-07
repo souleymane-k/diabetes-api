@@ -112,9 +112,9 @@ app.delete('/results/:result_id', (req, res)=>{
       .send('Result Not Found')
   }
  
-  store.results.splice(resultIndex, 1)
+  STORE.results.splice(resultIndex, 1)
 
-  logger.info(`Bookmark with id ${result_id} deleted.`)
+  logger.info(`result with id ${result_id} deleted.`)
     res
       .status(204)
       .end()
