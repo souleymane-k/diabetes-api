@@ -139,7 +139,7 @@ if (!dtype) {
   logger.error(`Invalid dtype '${dtype}' is required`)
   return res.status(400).send(`'dtype' is required`)
 }
-// const result = { id: uuid(), monthName, mealName, result, date,monthId,description,dtype }
+const result = { id: uuid(), monthName, mealName, result, date,monthId,description,dtype }
 
 STORE.results.push(result)
 
