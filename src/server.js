@@ -87,7 +87,6 @@ for (const [key, value] of Object.entries(newResult))
           error: { message: `Missing '${key}' in request body` }
         })
 
-
 STORE.results.push(newResult)
 .then(result => {
   res
