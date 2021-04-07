@@ -81,6 +81,13 @@ app.post(jsonParser, (req, res, next)=>{
  const {monthName, mealName, result, date,monthId,description,dtype} = req.body
 const newResult = { id: uuid(), monthName, mealName, result, date,monthId,description,dtype }
 
+for (const [key, value] of Object.entries(newResult))
+      if (value == null)
+        return res.status(400).json({
+          error: { message: `Missing '${key}' in request body` }
+        })
+
+
 STORE.results.push(newResult)
 .then(result => {
   res
