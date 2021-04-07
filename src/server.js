@@ -98,15 +98,9 @@ app.get('/months/:month_id', (req, res)=>{
   res.json(month);
 });
 
-// app.delete('/months/:month_id', (req, res)=>{
-//   const{month_id}= req.params
-// })
-
 
 app.post(jsonParser, (req, res)=>{
-  
  const {monthName, mealName, result, date,monthId,description,dtype} = req.body
-
 const ReqInput = { id: uuid(), monthName, mealName, result, date,monthId,description,dtype }
 
 STORE.results.push(ReqInput)
@@ -117,6 +111,27 @@ logger.info(`Result with id ${result.id} created`)
       .location(`http://localhost:8001/results/${result.id}`)
       .json(ReqInput)
 
+
+})
+
+app.delete('/results/:result_id', (req, res)=>{
+  const{result_id}= req.params
+
+  const resultIndex = STORE.results.findIndex(r =>r.id === result_id) 
+  
+  if (resultIndex === -1) {
+    logger.error(`result with id ${result_id} not found.`)
+    return res
+      .status(404)
+      .send('Result Not Found')
+  }
+ 
+  store.results.splice(resultIndex, 1)
+
+  logger.info(`Bookmark with id ${bookmark_id} deleted.`)
+    res
+      .status(204)
+      .end()
 
 })
 
