@@ -11,16 +11,12 @@ describe('App', () => {
 
 })
 describe('GET /months', () => {
-  context(`Given no months`, () => {
-    it(`responds with 200 and an empty list`, () => {
-      return supertest(app)
-        .get('/months')
-        .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-        .expect(200, [])
-    })
-
-})
-
+  it('should return an array of months', () => {
+    return supertest(app)
+      .get('/months')
+      .expect(200)
+      .expect('Content-Type', /json/);
+  })
 })
 
 
