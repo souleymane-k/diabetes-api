@@ -15,7 +15,10 @@ describe('GET /months', () => {
     return supertest(app)
       .get('/months')
       .expect(200)
-      .expect('Content-Type', /json/);
+      .expect('Content-Type', /json/);\
+      .then(res=>{
+        expect(res.body).tobe.an('array');
+      });
   })
 })
 
