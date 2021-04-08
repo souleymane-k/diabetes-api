@@ -12,11 +12,11 @@ describe('App', () => {
 })
 describe('GET /months', () => {
   context(`Given no months`, () => {
-    it(`responds with 200 and an empty list`, () => {
+    it(`responds with 404`, () => {
       return supertest(app)
         .get('/months')
         .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-        .expect(200, [])
+        .expect(404, 'Not Found')
     })
 
 })
