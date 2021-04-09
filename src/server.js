@@ -54,8 +54,8 @@ app.get('/users/:user_id', (req, res, next)=>{
       error: { message: `User doesn't exist` }
     })
   }
-  res.user = user
-  next()
+  res.json(user);
+  
 })
 
 
