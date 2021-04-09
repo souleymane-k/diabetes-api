@@ -2,12 +2,21 @@ require('dotenv').config()
 const express = require('express');
 const morgan = require('morgan')
 const STORE = require('../store.json')
+const USER = require('../users.json')
  const { PORT } = require('./config')
 const { v4: uuid } = require('uuid');
  const cors = require('cors')
  const jsonParser = express.json()
 
  const app = express();
+
+//  const {CLIENT_ORIGIN} = require('./config');
+//  app.use(
+//      cors({
+//          origin: CLIENT_ORIGIN
+//      })
+//  );
+
 
  app.use(express.json());
 
@@ -44,11 +53,11 @@ app.get('/results', (req, res)=>{
 })
 
 app.get('/users', (req, res)=>{
-  res.json(STORE.users)
+  res.json(USER.users)
 })
 app.get('/users/:user_id', (req, res, next)=>{
   const{user_id}=req.params;
-  const user = STORE.users.find(u => u.id ==user_id);
+  const user = USER.users.find(u => u.id ==user_id);
   if (!user) {
     return res.status(404).json({
       error: { message: `User doesn't exist` }
