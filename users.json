@@ -15,6 +15,22 @@
          "username":"sam.gamgee@shire.com",
          "password":"secret",
          "nickname":"oslo"
-        }
+        },
+        {
+          "id":3,
+          "date_created": "2029-01-22T16:28:32.615Z",
+          "fullname": "Souleymane Kone",
+          "username": "zack.gamgee@shire.com",
+          "password": "secret",
+          "nickname": "Zack"
+      },
+      {
+        "id":4,
+        "date_created": "2029-01-22T16:28:32.615Z",
+        "fullname": "Souleymane Kone",
+        "username": "marcory.gamgee@shire.com",
+        "password": "secret",
+        "nickname": "Marcory"
+    }
       ] 
 }
