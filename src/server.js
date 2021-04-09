@@ -52,9 +52,9 @@ app.get('/results', (req, res)=>{
   res.json(STORE.results)
 })
 
-app.get('/users', (req, res)=>{
-  res.json(USER.users)
-})
+// app.get('/users', (req, res)=>{
+//   res.json(USER.users)
+// })
 app.get('/users/:user_id', (req, res, next)=>{
   const{user_id}=req.params;
   const user = USER.users.find(u => u.id ==user_id);
@@ -134,7 +134,10 @@ app.delete('/results/:result_id', (req, res)=>{
 })
 
 ////////
-app.post(jsonParser, (req, res, next) => {
+app.get('/users', (req, res)=>{
+  res.json(USER.users)
+})
+.post(jsonParser, (req, res, next) => {
   const { fullname, username, nickname, password } = req.body
   const newUser = { fullname, username }
 
