@@ -10,7 +10,7 @@ describe('App', () => {
   })
 
 })
-describe('GET /months', () => {
+describe.skip('GET /months', () => {
   it('should return an array of months', () => {
     return supertest(app)
       .get('/months')
@@ -24,7 +24,7 @@ describe('GET /months', () => {
 
 
 
-describe('GET /results', () => {
+describe.skip('GET /results', () => {
   // it('should return an array of results', () => {
   //   return supertest(app)
   //     .get('/results')
