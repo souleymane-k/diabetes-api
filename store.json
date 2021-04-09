@@ -237,7 +237,7 @@
         "result":"110",
         "date":"07/03/2021",
         "monthId":7,
-         "description":"take 2hrs after breakfast. 2 bananas",
+        "description":"take 2hrs after breakfast. 2 bananas",
         "dtype":"type 1"
         },
         {
@@ -250,7 +250,7 @@
         "description":"take 2hrs after breakfast. 2 bananas",
         "dtype":"type 1"
         }
-    ],
+    ]
     // "users":[
     //   {
     //     "id": 1,
