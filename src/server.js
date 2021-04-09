@@ -110,8 +110,6 @@ STORE.results.push(newResult)
 
 res.status(201)
     .json(newResult);
-
-
 })
 
 app.delete('/results/:result_id', (req, res)=>{
@@ -134,6 +132,34 @@ app.delete('/results/:result_id', (req, res)=>{
       .end()
 
 })
+
+////////
+app.post(jsonParser, (req, res, next) => {
+  const { fullname, username, nickname, password } = req.body
+  const newUser = { fullname, username }
+
+  for (const [key, value] of Object.entries(newUser)) {
+    if (value == null) {
+      return res.status(400).json({
+        error: { message: `Missing '${key}' in request body` }
+      })
+    }
+  }
+
+  newUser.nickname = nickname;
+  newUser.password = password;
+
+  USER.users.push(newUser)
+
+  res.status(201)
+    .json(newUser);
+
+})
+
+
+
+
+///////
 
 
 
