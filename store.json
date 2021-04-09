@@ -250,8 +250,12 @@
         "description":"take 2hrs after breakfast. 2 bananas",
         "dtype":"type 1"
         }
-    ]
-    // "users":[
+        ]
+}
+
+
+
+// "users":[
     //   {
     //     "id": 1,
     //     "date_created": "2029-01-22T16:28:32.615Z",
@@ -267,4 +271,3 @@
     //     "password": "secret",
     //   }
     // ]
-}
