@@ -253,7 +253,7 @@
         ],
      "users":[
        {
-        " id": 1,
+        "id":1,
         "date_created": "2029-01-22T16:28:32.615Z",
         "fullname": "Meite Mamadou",
         "username":"emit.gamgee@shire.com",
@@ -261,7 +261,7 @@
         "nickname":"emit"
        },
        {
-        " id": 2,
+        "id":2,
         "date_created": "2029-01-22T16:28:32.615Z",
         "fullname": "Souleymane Kone",
         "username":"sam.gamgee@shire.com",
