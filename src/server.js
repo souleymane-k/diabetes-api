@@ -46,7 +46,7 @@ app.get('/results', (req, res)=>{
 app.get('/users', (req, res)=>{
   res.json(STORE.users)
 })
-app.get('/users/:user_id', (req, res)=>{
+app.get('/users/:user_id', (req, res, next)=>{
   const{user_id}=req.params;
   const user = STORE.users.find(u => u.id ==user_id);
   if (!user) {
@@ -55,7 +55,7 @@ app.get('/users/:user_id', (req, res)=>{
     })
   }
   res.user = user
-  
+  next()
 })
 
 
