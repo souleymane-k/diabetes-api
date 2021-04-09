@@ -43,6 +43,21 @@ app.get('/results', (req, res)=>{
   res.json(STORE.results)
 })
 
+app.get('/users', (req, res)=>{
+  res.json(STORE.users)
+})
+app.get('/users/:user_id', (req, res)=>{
+  const{user_id}=req.params;
+  const user = STORE.users.find(m => m.id ==user_id);
+  if (!user) {
+    return res.status(404).json({
+      error: { message: `User doesn't exist` }
+    })
+  }
+  res.user = user
+  
+})
+
 
 app.get('/results/:result_id', (req, res)=>{
   const{result_id}=req.params;
