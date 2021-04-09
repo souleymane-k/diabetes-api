@@ -5,7 +5,6 @@ const STORE = require('../store.json')
  const { PORT } = require('./config')
 const { v4: uuid } = require('uuid');
  const cors = require('cors')
- //const bodyParser = express.json()
  const jsonParser = express.json()
 
  const app = express();
@@ -24,10 +23,6 @@ const { v4: uuid } = require('uuid');
     console.log(apiToken)
     console.log(authToken)
   
-    // if (!authToken || authToken.split(' ')[1] !== apiToken) {
-    //   return res.status(401).json({ error: 'Unauthorized request' })
-    // }
-    // move to the next middleware
     next()
   })
 
@@ -88,24 +83,11 @@ for (const [key, value] of Object.entries(newResult))
         })
 
 STORE.results.push(newResult)
-// .then(result => {
-//   res
-//     .status(201)
-//     .location(path.posix.join(req.originalUrl, `/${result.id}`))
-//     .json(result)
-// })
-// .catch(next)
+
 res.status(201)
     .json(newResult);
 
 
-// logger.info(`Result with id ${result.id} created`)
-//     res
-//       .status(201)
-//       .location(`http://localhost:8001/results/${result.id}`)
-//       .json(ReqInput)
-
-//    .catch(next)
 })
 
 app.delete('/results/:result_id', (req, res)=>{
@@ -115,7 +97,7 @@ app.delete('/results/:result_id', (req, res)=>{
   
   if (resultIndex === -1) {
     console.log(`result with id ${result_id} not found.`)
-    // logger.error(`result with id ${result_id} not found.`)
+   
     return res
       .status(404)
       .send('Result Not Found');
@@ -123,7 +105,6 @@ app.delete('/results/:result_id', (req, res)=>{
  
   STORE.results.splice(resultIndex, 1)
 
-  //logger.info(`result with id ${result_id} deleted.`)
     res
       .status(204)
       .end()
@@ -152,77 +133,3 @@ app.listen(PORT, () => {
 module.exports = {app};
 
 
-
-
-
-// app.get('/months', function getMonths(req, res) {
-//   let response = STORE.months;
-
-//   // filter our pokemon by name if name query param is present
-//   if (req.query.name) {
-//     response = response.filter(months =>
-//       // case insensitive searching
-//       months.name.toLowerCase().includes(req.query.name.toLowerCase())
-//     )
-//   }
-
-//   //filter our pokemon by type if type query param is present
-//   if (req.query.types) {
-//     response = response.filter(pokemon =>
-//       pokemon.type.includes(req.query.types)
-//       //req.query.types
-//     )
-//   }
-
-// const months = [
-// {
-//   "id":1,
-//   "name":"January"
-// },
-// {
-//   "id":2,
-//   "name":"February"
-// },
-// {
-//   "id":3,
-//   "name":"March"
-// }]
-
-
-// for(const field of ['monthName','mealName','result','date','monthId','description','dtype']){
-  //   if (!req.body[field]) {
-  //     logger.error(`${field} is required`)
-  //     return res.status(400).send(`'${field}' is required`)
-  // }
-// }
-
-
-
-// if (!monthName) {
-//   logger.error(`Invalid monthName '${monthName}' is required`)
-//   return res.status(400).send(`'monthName' is required`)
-// }
-// if (!mealhName) {
-//   logger.error(`Invalid monthName '${mealName}' is required`)
-//   return res.status(400).send(`'mealName' is required`)
-// }
-// if (!Number.isInteger(result) || result < 0 || result > 500) {
-//   logger.error(`Invalid result '${result}' supplied`)
-//   return res.status(400).send(`'result' must be a number between 60 and 400`)
-// }
-// if (!date) {
-//   logger.error(`Invalid date '${date}' is required`)
-//   return res.status(400).send(`'date' is required`)
-// }
-// if (!Number.isInteger(monthId) || monthId < 1 || rating > 12) {
-//   logger.error(`Invalid monthId '${monthId}' supplied`)
-//   return res.status(400).send(`'monthId' must be a number between 1 and 12`)
-// }
-// if (!description) {
-//   logger.error(`Invalid description '${description}' is required`)
-//   return res.status(400).send(`'description' is required`)
-// }
-// if (!dtype) {
-//   logger.error(`Invalid dtype '${dtype}' is required`)
-//   return res.status(400).send(`'dtype' is required`)
-// }
