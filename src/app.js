@@ -1,11 +1,16 @@
 require('dotenv').config()
-const store = require('../store')
+//const STORE = require('../store.json')
 const express = require('express')
 const morgan = require('morgan')
+const monthsRouter = require('./months/months-router')
+const resultsRouter = require('./results/results-router')
+const usersRouter = require('./users/users-router')
+
 const cors = require('cors')
 const helmet = require('helmet')
 const { NODE_ENV } = require('./config')
 const { response } = require('express')
+const resultsRouter = require('./results/results-router')
 
 const app = express()
 
@@ -15,9 +20,10 @@ app.use(morgan(morganSetting))
 app.use(helmet())
 app.use(cors())
 
-// app.get('/months', (req, res) =>{
-//     res.send(store.months)
-// })
+app.use('/months',monthsRouter)
+app.use('/results',resultsRouter)
+app.use('/users', usersRouter)
+
 
 app.get('/', (req, res)=>{
     res.send('Hello, diabetes-api!')
