@@ -57,7 +57,7 @@
             "mealName":"Lunch",
             "result":"110",
             "date":"01-03-2021",
-            "monthId":1,
+            "month_id":1,
             "description":"take 2hrs after breakfast. 2 bananas",
             "diabetesType":"type 1"
           },
