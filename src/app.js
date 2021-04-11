@@ -8,8 +8,6 @@ const monthsRouter = require('./months/months-router')
 const resultsRouter = require('./results/results-router')
 const usersRouter = require('./users/users-router')
 
-const cors = require('cors')
-const helmet = require('helmet')
 const { NODE_ENV } = require('./config')
 const { response } = require('express')
 
