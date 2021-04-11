@@ -1,4 +1,4 @@
-const STORE = require('.../store.json')
+const STORE = require('../store.json')
 const express = require('express')
 // const STORE = require('.../store.json')
 const { v4: uuid } = require('uuid');
