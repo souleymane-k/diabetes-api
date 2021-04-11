@@ -2,6 +2,7 @@ const express = require('express')
 const USER = require('../users.json')
 const usersRouter = express.Router()
 const jsonParser = express.json()
+const { v4: uuid } = require('uuid');
 
 
 usersRouter
@@ -10,8 +11,8 @@ usersRouter
     res.json(USER.users)
   })
   .post(jsonParser, (req, res, next) => {
-    const {username,email, password } = req.body
-    const newUser = {username,email,password}
+    const {username,email,password } = req.body
+    const newUser = {id: uuid(),username,email,password}
   
     for (const [key, value] of Object.entries(newUser)) {
       if (value == null) {
