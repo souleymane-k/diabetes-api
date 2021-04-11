@@ -1,7 +1,7 @@
 const express = require('express')
 
 const usersRouter = express.Router()
-
+const bodyParser = express.json()
 
 
 usersRouter
@@ -9,7 +9,7 @@ usersRouter
   .get((req, res, next) => {
     res.json(USER.users)
   })
-  .post(jsonParser, (req, res, next) => {
+  .post(bodyParser, (req, res, next) => {
     const { fullname, username, nickname, password } = req.body
     const newUser = { fullname, username }
   
