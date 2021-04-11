@@ -10,7 +10,7 @@ const cors = require('cors')
 const helmet = require('helmet')
 const { NODE_ENV } = require('./config')
 const { response } = require('express')
-const resultsRouter = require('./results/results-router')
+
 
 const app = express()
 
