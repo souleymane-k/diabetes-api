@@ -4,7 +4,7 @@ const express = require('express')
 const { v4: uuid } = require('uuid');
 
 const resultsRouter = express.Router()
-const bodyParser = express.json()
+const jsonParser = express.json()
 
 
 resultsRouter
@@ -12,7 +12,7 @@ resultsRouter
   .get((req, res) => {
     res.json(STORE.results)
   })
-  .post(bodyParser, (req, res) => {
+  .post(jsonParser, (req, res) => {
   const {monthName, mealName, result, date,monthId,description,dtype} = req.body
   const newResult = { id: uuid(), monthName, mealName, result, date,monthId,description,dtype}
        
