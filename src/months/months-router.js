@@ -5,7 +5,7 @@ const monthsRouter = express.Router()
 // const bodyParser = express.json()
 
 monthsRouter
-  .route('/mounths')
+  .route('/months')
   .get((req, res) => {
     // move implementation logic into here
     res.json(STORE.months);
