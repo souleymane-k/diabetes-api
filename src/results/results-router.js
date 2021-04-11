@@ -28,18 +28,7 @@ resultsRouter
            .json(newResult);
    
   })
-  // app.get('/results/:result_id', (req, res)=>{
-//   const{result_id}=req.params;
-//   const result = STORE.results.find(m => m.id ==result_id);
-//   // make sure we found a month
-//     if(!result){
-//       logger.error(`Month with id ${result_id} not found.`);
-//       return res
-//       .status(404)
-//       .send('Result  Required');
-//     }
-//   res.json(result);
-// });
+  
 
   resultsRouter
   .route('/results/:result_id')
