@@ -2,7 +2,7 @@
 const app = require('./app')
 // const express = require('express');
 const morgan = require('morgan')
-// const STORE = require('../store.json')
+const STORE = require('../store.json')
 // const USER = require('../users.json')
  const { PORT } = require('./config')
 //  const { v4: uuid } = require('uuid');
@@ -46,9 +46,9 @@ const morgan = require('morgan')
 
 // })
 
-// app.get('/months', (req, res)=>{
-//   res.json(STORE.months)
-// })
+app.get('/months', (req, res)=>{
+  res.json(STORE.months)
+})
 
 // app.get('/results', (req, res)=>{
 //   res.json(STORE.results)
