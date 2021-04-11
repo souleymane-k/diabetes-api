@@ -13,8 +13,8 @@ resultsRouter
     res.json(STORE.results)
   })
   .post(jsonParser, (req, res) => {
-  const {monthName, mealName, result, date,monthId,description,dtype} = req.body
-  const newResult = { id: uuid(), monthName, mealName, result, date,monthId,description,dtype}
+  const {monthName, mealName, result, date,monthId,description,diabetesType} = req.body
+  const newResult = { id: uuid(), monthName, mealName, result, date,monthId,description,diabetesType}
        
        for (const [key, value] of Object.entries(newResult))
              if (value == null)

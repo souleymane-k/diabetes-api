@@ -22,9 +22,9 @@ app.use(helmet())
 app.use(cors())
 app.use(express.json());
 
-app.use('/months',monthsRouter)
-app.use('/results',resultsRouter)
-app.use('/users', usersRouter)
+app.use(monthsRouter)
+app.use(resultsRouter)
+app.use(usersRouter)
 
 
 app.get('/', (req, res)=>{
