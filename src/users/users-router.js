@@ -1,5 +1,5 @@
 const express = require('express')
-
+const USER = require('../users.json')
 const usersRouter = express.Router()
 const jsonParser = express.json()
 
