@@ -1,5 +1,5 @@
 require('dotenv').config()
-const STORE = require('../store.json')
+const STORE = require('./store.json')
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
