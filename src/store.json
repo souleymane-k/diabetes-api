@@ -53,7 +53,7 @@
     "results":[
         {
             "id":1,
-            "month":"January",
+            "month_taken":"January",
             "meal_taken":"Lunch",
             "result_read":"110",
             "date_tested":"01-03-2021",
@@ -64,7 +64,7 @@
           },
           {
            "id":2,
-            "month":"February",
+            "month_taken":"February",
             "meal_taken":"Lunch",
             "result_read":"110",
             "date_tested":"02-03-2021",
@@ -75,7 +75,7 @@
           },
           {
             "id":3,
-            "month":"March",
+            "month_taken":"March",
             "meal_taken":"Lunch",
             "result_read":"110",
             "date_tested":"03-03-2021",
@@ -86,7 +86,7 @@
           },
           {
             "id":4,
-           "month":"April",
+           "month_taken":"April",
            "meal_taken":"Lunch",
            "result_read":"110",
            "date_tested":"04-03-2021",
@@ -97,7 +97,7 @@
           },
           {
             "id":5,
-           "month":"May",
+           "month_taken":"May",
            "meal_taken":"Lunch",
            "result_read":"110",
            "date_tested":"05-03-2021",
@@ -108,7 +108,7 @@
           },
           {
             "id":6,
-            "month":"June",
+            "month_taken":"June",
             "meal_taken":"Lunch",
             "result_read":"110",
             "date_tested":"06-03-2021",
@@ -119,7 +119,7 @@
           },
           {
             "id":7,
-           "month":"July",
+           "month_taken":"July",
            "meal_taken":"Lunch",
             "result_read":"110",
             "date_tested":"07-03-2021",
@@ -130,7 +130,7 @@
           },
           {
             "id":8,
-           "month":"August",
+           "month_taken":"August",
            "meal_taken":"Lunch",
             "result_read":"110",
            "date_tested":"08-03-2021",
@@ -141,7 +141,7 @@
           },
           {
             "id":9,
-           "month":"September",
+           "month_taken":"September",
             "meal_taken":"Lunch",
             "result_read":"110",
             "date_tested":"09-03-2021",
@@ -152,7 +152,7 @@
           },
           {
             "id":10,
-            "month":"October",
+            "month_taken":"October",
             "meal_taken":"Lunch",
             "result_read":"110",
             "date_tested":"10-03-2021",
@@ -163,7 +163,7 @@
           },
           {
             "id":11,
-           "month":"November",
+           "month_taken":"November",
             "meal_taken":"Lunch",
             "result_read":"110",
             "date_tested":"11-03-2021",
@@ -174,7 +174,7 @@
           },
           {
             "id":12,
-            "month":"December",
+            "month_taken":"December",
             "meal_taken":"Lunch",
             "result_read":"110",
             "date_tested":"12-03-2021",
@@ -185,7 +185,7 @@
           },
           {
             "id":13,
-            "month":"January",
+            "month_taken":"January",
             "meal_taken":"Dinner",
             "result_read":"120",
             "date_tested":"01-03-2021",
@@ -196,7 +196,7 @@
           },
           {
             "id":14,
-            "month":"January",
+            "month_taken":"January",
             "meal_taken":"Breakfast",
             "result_read":"90",
             "date_tested":"01-03-2021",
@@ -207,7 +207,7 @@
           },
         {
             "id":15,
-            "month":"February",
+            "month_taken":"February",
             "meal_taken":"Breakfast",
             "result_read":"110",
             "date_tested":"02-03-2021",
@@ -218,7 +218,7 @@
         },
         {
             "id":16,
-            "month":"February",
+            "month_taken":"February",
             "meal_taken":"Dinner",
             "result_read":"110",
             "date_tested":"02-03-2021",
@@ -229,7 +229,7 @@
         },
         {
             "id":17,
-            "month":"June",
+            "month_taken":"June",
             "meal_taken":"Brakfast",
             "result_read":"110",
             "date_tested":"06-03-2021",
@@ -240,7 +240,7 @@
         },
         {
             "id":18,
-            "month":"June",
+            "month_taken":"June",
             "meal_taken":"Lunch",
             "result_read":"110",
             "date_tested":"06-03-2021",
@@ -251,7 +251,7 @@
         },
         {
         "id":19,
-        "month":"July",
+        "month_taken":"July",
         "meal_taken":"Breakfast",
         "result_read":"110",
         "date_tested":"07-03-2021",
@@ -262,7 +262,7 @@
         },
         {
         "id":20,
-        "month":"December",
+        "month_taken":"December",
         "meal_taken":"Breakfast",
         "result_read":"110",
         "date_tested":"12-03-2021",
