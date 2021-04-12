@@ -1,5 +1,5 @@
 require('dotenv').config()
-//const STORE = require('../store.json')
+const STORE = require('../store.json')
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
@@ -28,7 +28,8 @@ app.use(usersRouter)
 
 
 app.get('/', (req, res)=>{
-    res.send('Hello, diabetes-api!')
+    res.json(STORE)
+    // res.send('Hello, diabetes-api!')
 })
 
 app.use(function validateBearerToken(req, res, next) {
