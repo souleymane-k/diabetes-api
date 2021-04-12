@@ -2,35 +2,32 @@
  "users":[
         {
          "id":1,
-         "date_created": "2029-01-22T16:28:32.615Z",
          "fullname": "Meite Mamadou",
          "username":"emit.gamgee@shire.com",
          "password":"secret",
-         "nickname":"emit"
+         "confirm_password":"secret"
+        
         },
         {
          "id":2,
-         "date_created": "2029-01-22T16:28:32.615Z",
          "fullname": "Souleymane Kone",
          "username":"sam.gamgee@shire.com",
-         "password":"secret",
-         "nickname":"oslo"
+         "password":"oslo",
+         "confirm_password":"oslo"
         },
         {
           "id":3,
-          "date_created": "2029-01-22T16:28:32.615Z",
           "fullname": "Zack Zack",
           "username": "zack.gamgee@shire.com",
-          "password": "secret",
-          "nickname": "Zack"
+          "password": "secretZack",
+          "confirm_password": "secretZack"
       },
       {
         "id":4,
-        "date_created": "2029-01-22T16:28:32.615Z",
         "fullname": "Mary Corey",
         "username": "marcory.gamgee@shire.com",
-        "password": "secret",
-        "nickname": "Marcory"
+        "password": "secretMarcory",
+        "confirm_password": "secretMarcory"
     }
       ] 
 }
