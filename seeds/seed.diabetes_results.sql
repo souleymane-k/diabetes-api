@@ -1,5 +1,4 @@
-
-INSERT INTO diabetes_results (id,month_taken,meal_taken,result_read,date_tested,month_id,user_id,description,diabetesType)
+INSERT INTO diabetes_results (id,month_taken,meal_taken,result_read,date_tested,month_id,userid,description,diabetesType)
 VALUES 
 ('1','January','Lunch','110','01-03-2021','1','1','take 2hrs after breakfast. 2 bananas','type 1'),
  ('2','February','Lunch','110','02-03-2021','2','1','take 2hrs after breakfast. 2 bananas','type 1'),

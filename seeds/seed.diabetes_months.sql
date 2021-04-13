@@ -1,6 +1,6 @@
 INSERT INTO diabetes_months (id, month_taken)
 VALUES 
-   ('1', 'January'),
+   ('1','January'),
     ('2','February'),
     ('3','March'),
     ('4','April'),
