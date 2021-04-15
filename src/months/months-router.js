@@ -5,8 +5,15 @@ const STORE = require('../store.json')
 const monthsRouter = express.Router()
 // const bodyParser = express.json()
 
-monthsRouter
-  .route('/api/months')
+// monthsRouter
+//   .route('/api/months')
+//   .get((req, res) => {
+//     // move implementation logic into here
+//     res.json(STORE.months);
+//   })
+
+  monthsRouter
+  .route('/')
   .get((req, res) => {
     // move implementation logic into here
     res.json(STORE.months);
@@ -14,7 +21,7 @@ monthsRouter
 
 
   monthsRouter
-  .route('/api/months/:month_id')
+  .route('/:month_id')
   .get((req, res)=>{
       const{month_id}=req.params;
       const month = STORE.months.find(m => m.id ==month_id);
@@ -29,6 +36,6 @@ monthsRouter
     });
 
 
-
+//route('/api/months/:month_id')
 
   module.exports = monthsRouter
