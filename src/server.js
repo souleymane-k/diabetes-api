@@ -14,6 +14,13 @@ const morgan = require('morgan')
 //      })
 //  );
 
+ const {CLIENT_ORIGIN} = require('./config');
+ app.use(
+     cors({
+         origin: CLIENT_ORIGIN
+     })
+ );
+
 
 
 
