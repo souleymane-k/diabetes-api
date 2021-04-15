@@ -8,7 +8,7 @@ const jsonParser = express.json()
 
 
 resultsRouter
-  .route('/results')
+  .route('/')
   .get((req, res) => {
     res.json(STORE.results)
   })
@@ -31,7 +31,7 @@ resultsRouter
   
 
   resultsRouter
-  .route('/results/:result_id')
+  .route('/:result_id')
   .get((req, res) => {
     const{result_id}=req.params;
     const result = STORE.results.find(m => m.id ==result_id);
