@@ -22,7 +22,7 @@ app.use(helmet())
 app.use(cors())
 app.use(express.json());
 
-app.use(monthsRouter)
+app.use('/api/months',monthsRouter)
 app.use(resultsRouter)
 app.use(usersRouter)
 
