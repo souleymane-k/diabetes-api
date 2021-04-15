@@ -23,8 +23,8 @@ app.use(cors())
 app.use(express.json());
 
 app.use('/api/months',monthsRouter)
-app.use(resultsRouter)
-app.use(usersRouter)
+app.use('/api/results',resultsRouter)
+app.use('/api/users',usersRouter)
 
 
 app.get('/', (req, res)=>{

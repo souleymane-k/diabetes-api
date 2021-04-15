@@ -6,7 +6,7 @@ const { v4: uuid } = require('uuid');
 
 
 usersRouter
-  .route('/users')
+  .route('/')
   .get((req, res, next) => {
     res.json(USER.users)
   })
@@ -34,7 +34,7 @@ usersRouter
   })
 
 usersRouter
-  .route('/users/:user_id')
+  .route('/:user_id')
   .get((req, res) => {
     const{user_id}=req.params;
     const result = USER.users.find(m => m.id ==user_id);
