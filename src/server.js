@@ -1,8 +1,10 @@
-
+require("dotenv").config();
+const knex=require('knex');
 const app = require('./app')
 const morgan = require('morgan')
 const { PORT, DATABASE_URL } = require('./config')
  const cors = require('cors')
+
 
 
 //  const app = express();
