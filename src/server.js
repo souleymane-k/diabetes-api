@@ -3,7 +3,7 @@ const knex=require('knex');
 const app = require('./app')
 const morgan = require('morgan')
 const { PORT, DATABASE_URL } = require('./config')
- const cors = require('cors')
+const cors = require('cors')
 
 
 
@@ -22,10 +22,7 @@ const { PORT, DATABASE_URL } = require('./config')
      connection: DATABASE_URL,
 })
 
-
-
-
-
+app.set("db", db);
 
 
  const morganSetting = process.env.NODE_ENV === 'production' ? 'tiny': 'common'
@@ -41,10 +38,6 @@ const { PORT, DATABASE_URL } = require('./config')
   
     next()
   })
-
-
-
-
 
 // 4 parameters in middleware, express knows to treat this as error handler
 app.use((error, req, res, next) => {
