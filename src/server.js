@@ -4,6 +4,7 @@ const app = require('./app')
 const morgan = require('morgan')
 const { PORT, DATABASE_URL } = require('./config')
 const cors = require('cors')
+const pg = require('pg');
 
 
 
@@ -40,15 +41,15 @@ app.set("db", db);
   })
 
 // 4 parameters in middleware, express knows to treat this as error handler
-app.use((error, req, res, next) => {
-  let response
-  if (process.env.NODE_ENV === 'production') {
-    response = { error: { message: 'server error' }}
-  } else {
-    response = { error }
-  }
-  res.status(500).json(response)
-})
+// app.use((error, req, res, next) => {
+//   let response
+//   if (process.env.NODE_ENV === 'production') {
+//     response = { error: { message: 'server error' }}
+//   } else {
+//     response = { error }
+//   }
+//   res.status(500).json(response)
+// })
 
 
 app.listen(PORT, () => {
