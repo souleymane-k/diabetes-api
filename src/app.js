@@ -28,8 +28,8 @@ app.use('/api/users',usersRouter)
 
 
 app.get('/', (req, res)=>{
-    res.json(STORE)
-    // res.send('Hello, diabetes-api!')
+    // res.json(STORE)
+res.send('Hello, diabetes-api!')
 })
 
 app.use(function validateBearerToken(req, res, next) {
