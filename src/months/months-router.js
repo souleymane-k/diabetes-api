@@ -10,7 +10,7 @@ const monthsRouter = express.Router()
   id: month_id,
   month_taken: month.month_taken,
 })
-monthsMonth
+monthsRouter
   .route('/')
   .get((req, res, next) => {
     const knexInstance = req.app.get('db')
