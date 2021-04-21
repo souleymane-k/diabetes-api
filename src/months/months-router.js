@@ -14,6 +14,7 @@ const monthsRouter = express.Router()
 monthsRouter
   .route('/')
   .get((req, res, next) => {
+    console.log('FINDING ALL MONTHS');
     const knexInstance = req.app.get('db')
     MonthsService.getAllMonth(knexInstance)
       .then(months => {

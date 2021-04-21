@@ -33,6 +33,7 @@ res.send('Hello, diabetes-api!')
 app.use(function errorHandler(error, req, res, next){
     let response
     if(NODE_ENV ==='production'){
+    
         response = { error: { message: error } }
     }else{
         console.error(error)
@@ -43,6 +44,7 @@ app.use(function errorHandler(error, req, res, next){
 
 module.exports = app
 
+//response = { error: { message: 'server error' } }
 
 // app.use(function validateBearerToken(req, res, next) {
 //     const apiToken = process.env.API_TOKEN
