@@ -14,9 +14,8 @@ const jsonParser = express.json()
 monthsRouter
   .route('/')
   .get((req, res, next) => {
-    console.log('FINDING ALL MONTHS');
     const knexInstance = req.app.get('db')
-    MonthsService.getAllMonth(knexInstance)
+    MonthsService.getAllMonths(knexInstance)
       .then(months => {
         res.json(months.map(serializeMonth))
       })
@@ -42,7 +41,7 @@ monthsRouter
         res
           .status(201)
           .location(path.posix.join(req.originalUrl, `/${month.id}`))
-          .json(serializeUser(user))
+          .json(serializeMonth(month))
       })
       .catch(next)
   })
