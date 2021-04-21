@@ -1,13 +1,10 @@
-const STORE = require('../store.json')
 const express = require('express')
 const ResultsService = require('./results-service')
 // const STORE = require('.../store.json')
 const { v4: uuid } = require('uuid');
-
 const resultsRouter = express.Router()
 const jsonParser = express.json()
 
-/////////////////////////////////////
 
 const serializeResult = result => ({
   id: result_id,
