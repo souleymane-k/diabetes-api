@@ -10,6 +10,7 @@ const jsonParser = express.json()
 const serializeUser = user => ({
   id: user.id,
   username: user.username,
+  email: user.email,
   password: user.password,
 })
 usersRouter
@@ -23,8 +24,8 @@ usersRouter
       .catch(next)
   })
   .post(jsonParser, (req, res, next) => {
-    const {username,  password } = req.body
-    const newUser = { id: uuid(), username}
+    const {username, email, password } = req.body
+    const newUser = { id: uuid(), email,username}
     for (const [key, value] of Object.entries(newUser)) {
       if (value == null) {
         return res.status(400).json({
@@ -33,6 +34,7 @@ usersRouter
       }
     }
     newUser.username = username;
+    newUser.email = email;
     newUser.password = password;
 
     UsersService.insertUser(
@@ -80,8 +82,8 @@ usersRouter
       .catch(next)
   })
   .patch(jsonParser, (req, res, next) => {
-    const {username, password } = req.body
-    const userToUpdate = {username, password }
+    const {username, email,password } = req.body
+    const userToUpdate = {username,email, password }
 
     const numberOfValues = Object.values(userToUpdate).filter(Boolean).length
     if (numberOfValues === 0)
