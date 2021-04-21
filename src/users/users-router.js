@@ -9,7 +9,6 @@ const jsonParser = express.json()
 
 const serializeUser = user => ({
   id: user.id,
-  fullname: user.fullname,
   username: user.username,
   password: user.password,
 })
@@ -24,8 +23,8 @@ usersRouter
       .catch(next)
   })
   .post(jsonParser, (req, res, next) => {
-    const { fullname, username,  password } = req.body
-    const newUser = { id: uuid(),fullname, username}
+    const {username,  password } = req.body
+    const newUser = { id: uuid(), username}
 
     for (const [key, value] of Object.entries(newUser)) {
       if (value == null) {
@@ -83,14 +82,14 @@ usersRouter
       .catch(next)
   })
   .patch(jsonParser, (req, res, next) => {
-    const { fullname, username, password } = req.body
-    const userToUpdate = { fullname, username, password }
+    const {username, password } = req.body
+    const userToUpdate = {username, password }
 
     const numberOfValues = Object.values(userToUpdate).filter(Boolean).length
     if (numberOfValues === 0)
       return res.status(400).json({
         error: {
-          message: `Request body must contain either 'fullname', 'username', 'password'`
+          message: `Request body must contain either 'username', 'password'`
         }
       })
 
