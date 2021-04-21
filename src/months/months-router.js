@@ -8,7 +8,7 @@ const monthsRouter = express.Router()
 
 
  const serializeMonth = month => ({
-  id: month_id,
+  id: month.id,
   month_taken: month.month_taken,
 })
 monthsRouter
@@ -47,7 +47,7 @@ monthsRouter
 
 
 
-  
+
 
 
 

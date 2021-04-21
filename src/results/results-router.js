@@ -7,7 +7,7 @@ const jsonParser = express.json()
 
 
 const serializeResult = result => ({
-  id: result_id,
+  id: result.id,
   month_taken:result.month_taken,
   meal_taken:result.meal_taken,
   result_read:result.result_read,
@@ -28,7 +28,6 @@ resultsRouter
       })
       .catch(next)
   })
-  // start here
   .post(jsonParser, (req, res) => {
     const {month_taken, meal_taken, result_read, date,month_id,userid,description,diabetesType} = req.body
     const newResult = { id: uuid(), month_taken, meal_taken, result_read, date,month_id,userid,description,diabetesType}
@@ -38,6 +37,12 @@ resultsRouter
         return res.status(400).json({
           error: { message: `Missing '${key}' in request body` }
         })
+
+        newResult.month_taken = month_taken;
+        newResult.meal_taken = meal_taken;
+        newResult.result_read = result_read;
+        newResult.description = description;
+        newResult.diabetesType = diabetesType;
 
     ResultsService.insertResult(
       req.app.get('db'),
