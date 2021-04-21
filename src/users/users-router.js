@@ -25,7 +25,6 @@ usersRouter
   .post(jsonParser, (req, res, next) => {
     const {username,  password } = req.body
     const newUser = { id: uuid(), username}
-
     for (const [key, value] of Object.entries(newUser)) {
       if (value == null) {
         return res.status(400).json({
@@ -33,7 +32,6 @@ usersRouter
         })
       }
     }
-
     newUser.username = username;
     newUser.password = password;
 

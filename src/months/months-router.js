@@ -4,7 +4,7 @@ const express = require('express')
 const MonthsService = require('./months-service')
 
 const monthsRouter = express.Router()
- //const jsonParser = express.json()
+const jsonParser = express.json()
 
 
  const serializeMonth = month => ({
@@ -22,6 +22,32 @@ monthsRouter
       })
       .catch(next)
   })
+  .post(jsonParser, (req, res, next) => {
+    const {month_taken} = req.body
+    const newMonth = { id: uuid(), month_taken}
+    for (const [key, value] of Object.entries(newMonth)) {
+      if (value == null) {
+        return res.status(400).json({
+          error: { message: `Missing '${key}' in request body` }
+        })
+      }
+    }
+    newMonth.month_taken = month_taken;
+  
+    MonthsService.insertMonth(
+      req.app.get('db'),
+      newMonth
+    )
+      .then(month => {
+        res
+          .status(201)
+          .location(path.posix.join(req.originalUrl, `/${month.id}`))
+          .json(serializeUser(user))
+      })
+      .catch(next)
+  })
+
+
 
   monthsRouter
   .route('/:month_id')
