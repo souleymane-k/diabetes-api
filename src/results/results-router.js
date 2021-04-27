@@ -15,7 +15,7 @@ const serializeResult = result => ({
   month_id:result.month_id,
   userid:result.userid,
   description:result.description,
-  diabetesType:result.diabetesType,
+  diabetestype:result.diabetestype,
 })
 
 resultsRouter
