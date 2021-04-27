@@ -89,15 +89,15 @@ resultsRouter
       .catch(next)
   })
   .patch(jsonParser, (req, res, next) => {
-    const {month_taken, meal_taken, result_read, date,description,diabetesType} = req.body
-    const resultToUpdate = {month_taken, meal_taken, result_read, date,description,diabetesType}
+    const {month_taken, meal_taken, result_read, date,description,diabetestype} = req.body
+    const resultToUpdate = {month_taken, meal_taken, result_read, date,description,diabetestype}
   
     const numberOfValues = Object.values(resultToUpdate).filter(Boolean).length
     if (numberOfValues === 0)
       return res.status(400).json({
         error: {
           // message: `Request body must contain either 'content' or 'modified'`
-          message: `Request body must contain 'month_taken, meal_taken, result_read, date,description,diabetesType'`
+          message: `Request body must contain 'month_taken, meal_taken, result_read, date,description,diabetestype'`
         }
       })
 
