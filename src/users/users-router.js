@@ -3,12 +3,11 @@ const express = require('express')
 const UsersService = require('./users-service')
 //const USER = require('../users.json')
 const { v4: uuid } = require('uuid');
-
 const usersRouter = express.Router()
-const jsonParser = express.json()
+const jsonBodyParser = express.json()
 
 const serializeUser = user => ({
-  id: user.id,
+  id: user_id,
   username: user.username,
   email: user.email,
   password: user.password,
@@ -23,33 +22,53 @@ usersRouter
       })
       .catch(next)
   })
-  .post(jsonParser, (req, res, next) => {
-    const {username, email, password } = req.body
-    const newUser = { id: uuid(), email,username}
-    for (const [key, value] of Object.entries(newUser)) {
-      if (value == null) {
+  .post(jsonBodyParser, (req, res, next) => {
+    const {username, email, password} = req.body
+
+    for (const field of ['username', 'email', 'password'])
+      if (!req.body[field])
         return res.status(400).json({
-          error: { message: `Missing '${key}' in request body` }
+          error: `Missing '${field}' in request body`
         })
-      }
-    }
-    newUser.username = username;
-    newUser.email = email;
-    newUser.password = password;
+      
+   // TODO: check username doesn't start with spaces
+   const passwordError = UsersService.validatePassword(password)
 
-    UsersService.insertUser(
-      req.app.get('db'),
-      newUser
-    )
-      .then(user => {
-        res
-          .status(201)
-          .location(path.posix.join(req.originalUrl, `/${user.id}`))
-          .json(serializeUser(user))
-      })
-      .catch(next)
-  })
+   if (passwordError)
+     return res.status(400).json({ error: passwordError })
 
+   UsersService.hasUserWithUserName(
+     req.app.get('db'),
+     username
+   )
+     .then(hasUserWithUserName => {
+       if (hasUserWithUserName)
+         return res.status(400).json({ error: `Username already taken` })
+
+       return UsersService.hashPassword(password)
+         .then(hashedPassword => {
+           const newUser = {
+             username,
+             email,
+             password: hashedPassword,
+            //  date_created: 'now()',
+           }
+
+           
+           return UsersService.insertUser(
+             req.app.get('db'),
+             newUser
+           )
+             .then(user => {
+               res
+                 .status(201)
+                 .location(path.posix.join(req.originalUrl, `/${user.id}`))
+                 .json(UsersService.serializeUser(user))
+             })
+         })
+     })
+     .catch(next)
+ })
 usersRouter
   .route('/:user_id')
   .all((req, res, next) => {
@@ -81,7 +100,7 @@ usersRouter
       })
       .catch(next)
   })
-  .patch(jsonParser, (req, res, next) => {
+  .patch(jsonBodyParser, (req, res, next) => {
     const {username, email,password } = req.body
     const userToUpdate = {username,email, password }
 
@@ -103,6 +122,8 @@ usersRouter
       })
       .catch(next)
   })
+
+  module.exports = usersRouter
 
 // {
 //   "id": 1,
@@ -183,7 +204,12 @@ usersRouter
 //       .end()
 
 //   })
+
+
+          // newUser.username = usernamve;
+          //  newUser.email = email;
+          //  newUser.password= password;
   
 
-module.exports = usersRouter
+
 

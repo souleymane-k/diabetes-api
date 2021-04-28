@@ -7,10 +7,9 @@ const helmet = require('helmet')
 const monthsRouter = require('./months/months-router')
 const resultsRouter = require('./results/results-router')
 const usersRouter = require('./users/users-router')
-
+const authRouter = require('./auth/auth-router')
 const { NODE_ENV } = require('./config')
 const { response } = require('express')
-
 
 const app = express()
 
@@ -20,6 +19,7 @@ app.use(morgan(morganSetting))
 app.use(helmet())
 app.use(cors())
 app.use('/api/months',monthsRouter)
+app.use('/api/auth',authRouter)
 app.use('/api/results',resultsRouter)
 app.use('/api/users',usersRouter)
 
