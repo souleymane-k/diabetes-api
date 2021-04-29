@@ -11,7 +11,7 @@ const serializeResult = result => ({
   month_taken:result.month_taken,
   meal_taken:result.meal_taken,
   result_read:result.result_read,
-  date:result.date,
+  date_tested:result.date_tested,
   month_id:result.month_id,
   userid:result.userid,
   description:result.description,
@@ -29,8 +29,8 @@ resultsRouter
       .catch(next)
   })
   .post(jsonParser, (req, res) => {
-    const {month_taken, meal_taken, result_read, date,month_id,userid,description,diabetestype} = req.body
-    const newResult = { id: uuid(), month_taken, meal_taken, result_read, date,month_id,userid,description,diabetestype}
+    const {month_taken, meal_taken, result_read, date_tested,month_id,userid,description,diabetestype} = req.body
+    const newResult = { id: uuid(), month_taken, meal_taken,date_tested, result_read,month_id,userid,description,diabetestype}
 
     for (const [key, value] of Object.entries(newResult))
       if (value == null)
@@ -41,6 +41,7 @@ resultsRouter
         newResult.month_taken = month_taken;
         newResult.meal_taken = meal_taken;
         newResult.result_read = result_read;
+        newResult.date_tested = date_tested;
         newResult.description = description;
         newResult.diabetesType = diabetestype;
 
@@ -89,15 +90,15 @@ resultsRouter
       .catch(next)
   })
   .patch(jsonParser, (req, res, next) => {
-    const {month_taken, meal_taken, result_read, date,description,diabetestype} = req.body
-    const resultToUpdate = {month_taken, meal_taken, result_read, date,description,diabetestype}
+    const {month_taken, meal_taken, result_read, date_tested,description,diabetestype} = req.body
+    const resultToUpdate = {month_taken, meal_taken, result_read, date_tested,description,diabetestype}
   
     const numberOfValues = Object.values(resultToUpdate).filter(Boolean).length
     if (numberOfValues === 0)
       return res.status(400).json({
         error: {
           // message: `Request body must contain either 'content' or 'modified'`
-          message: `Request body must contain 'month_taken, meal_taken, result_read, date,description,diabetestype'`
+          message: `Request body must contain 'month_taken, meal_taken, result_read, date_tested,description,diabetestype'`
         }
       })
 
