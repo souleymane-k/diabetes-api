@@ -31,7 +31,7 @@ resultsRouter
   })
   .post(jsonParser, (req, res, next) => {
     const {month_taken, meal_taken, result_read, date_tested,description,diabetestype} = req.body
-    const newResult = {month_taken, meal_taken,date_tested, result_read,description,diabetestype}
+    const newResult = { month_taken, meal_taken,date_tested, result_read,description,diabetestype}
 //month_id, userid,
     for (const [key, value] of Object.entries(newResult))
       if (value == null)
