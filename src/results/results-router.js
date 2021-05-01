@@ -1,7 +1,8 @@
 const express = require('express')
 const ResultsService = require('./results-service')
 // const STORE = require('.../store.json')
-const { v4: uuid } = require('uuid');
+//const { v4: uuid } = require('uuid');
+
 const resultsRouter = express.Router()
 const jsonParser = express.json()
 
@@ -28,10 +29,10 @@ resultsRouter
       })
       .catch(next)
   })
-  .post(jsonParser, (req, res) => {
-    const {month_taken, meal_taken, result_read, date_tested,month_id,userid,description,diabetestype} = req.body
-    const newResult = { id: uuid(), month_taken, meal_taken,date_tested, result_read,month_id,userid,description,diabetestype}
-
+  .post(jsonParser, (req, res, next) => {
+    const {month_taken, meal_taken, result_read, date_tested,description,diabetestype} = req.body
+    const newResult = {month_taken, meal_taken,date_tested, result_read,description,diabetestype}
+//month_id, userid,
     for (const [key, value] of Object.entries(newResult))
       if (value == null)
         return res.status(400).json({
@@ -43,7 +44,7 @@ resultsRouter
         newResult.result_read = result_read;
         newResult.date_tested = date_tested;
         newResult.description = description;
-        newResult.diabetesType = diabetestype;
+        newResult.diabetestype = diabetestype;
 
     ResultsService.insertResult(
       req.app.get('db'),

@@ -18,17 +18,17 @@ const pg = require('pg');
      })
  );
 
- pg.defaults.ssl = process.env.NODE_ENV ==="production"?
-{rejectUnauthorized:false}:false
+//  pg.defaults.ssl = process.env.NODE_ENV ==="production"?
+// {rejectUnauthorized:false}:false
 const db = knex({
   client:"pg",
   connection:DATABASE_URL,
-  ssl: true,
-    extra: {
-      ssl: {
-        rejectUnauthorized: false
-      },
-    },
+  // ssl: true,
+  //   extra: {
+  //     ssl: {
+  //       rejectUnauthorized: false
+  //     },
+  //   },
 });
 
 //  const db = knex({
@@ -66,7 +66,7 @@ app.set("db", db);
 
 
 app.listen(PORT, () => {
-  console.log(`Server listening at http://localhost:${PORT}`)
+  console.log(`Server listening at http://localhost:${PORT} ${DATABASE_URL}`)
 })
 
 

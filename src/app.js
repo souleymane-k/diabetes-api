@@ -32,11 +32,12 @@ res.send('Hello, diabetes-api!')
 
 app.use(function errorHandler(error, req, res, next){
     let response
+    console.error(error)
     if(NODE_ENV ==='production'){
     
         response = {message: error.message.error}
     }else{
-        console.error(error)
+        
          response = {message: error.message.error}
     }
     res.status(500).json(response)
