@@ -30,8 +30,8 @@ resultsRouter
       .catch(next)
   })
   .post(jsonParser, (req, res, next) => {
-    const {month_taken, meal_taken, result_read, date_tested,description,diabetestype} = req.body
-    const newResult = { month_taken, meal_taken,date_tested, result_read,description,diabetestype}
+    const {month_taken, meal_taken, result_read, date_tested,month_id,userid,description,diabetestype} = req.body
+    const newResult = { month_taken, meal_taken, result_read,date_tested,month_id,userid,description,diabetestype}
 //month_id, userid,
     for (const [key, value] of Object.entries(newResult))
       if (value == null)
@@ -43,6 +43,8 @@ resultsRouter
         newResult.meal_taken = meal_taken;
         newResult.result_read = result_read;
         newResult.date_tested = date_tested;
+        newResult.month_id=month_id;
+        newResult.userid=userid;
         newResult.description = description;
         newResult.diabetestype = diabetestype;
 

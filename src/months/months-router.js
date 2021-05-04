@@ -23,7 +23,7 @@ monthsRouter
   })
   .post(jsonParser, (req, res, next) => {
     const {month_taken} = req.body
-    const newMonth = { id: uuid(), month_taken}
+    const newMonth = {month_taken}
     for (const [key, value] of Object.entries(newMonth)) {
       if (value == null) {
         return res.status(400).json({

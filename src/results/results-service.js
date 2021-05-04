@@ -1,4 +1,4 @@
-const resultsService = {
+const ResultsService = {
     getAllResults(knex) {
       return knex.select('*').from('diabetes_results')
     },
@@ -34,4 +34,4 @@ const resultsService = {
     },
   }
   
-  module.exports = resultsService
+  module.exports = ResultsService
