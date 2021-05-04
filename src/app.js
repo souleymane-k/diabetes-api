@@ -1,9 +1,8 @@
-require('dotenv').config()
-// const STORE = require('./store.json')
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
 const helmet = require('helmet')
+require('dotenv').config()
 const monthsRouter = require('./months/months-router')
 const resultsRouter = require('./results/results-router')
 const usersRouter = require('./users/users-router')
@@ -16,11 +15,13 @@ const app = express()
 const morganSetting = process.env.NODE_ENV === 'production' ? 'tiny' : 'common'
 
 app.use(morgan(morganSetting))
-app.use(helmet())
 app.use(cors())
+app.use(helmet())
+
+
 app.use('/api/months',monthsRouter)
-app.use('/api/auth/login',authRouter)
 app.use('/api/results',resultsRouter)
+app.use('/api/auth',authRouter)
 app.use('/api/users',usersRouter)
 
 
