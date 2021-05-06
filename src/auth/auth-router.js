@@ -49,6 +49,18 @@ authRouter.post('/refresh', requireAuth, (req, res) => {
   res.send({
     authToken: AuthService.createJwt(sub, payload),
   })
-})
+});
+authRouter
+  .route('/current-user')
+  .get(requireAuth, async (req, res, next) => {
+    const user = UsersService.serialize(req.user);
+    try {
+      const result = await ResultsService.findCurrentByUserId(req.app.get('db'), user.id);
+      user.hasCurrentResult = result ? true : false;
+      res.json(user);
+    } catch(err) {
+      next({status: 500, message: err.message});
+    }
+  });
 
 module.exports = authRouter

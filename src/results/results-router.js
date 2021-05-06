@@ -55,7 +55,7 @@ resultsRouter
       .then(result => {
         res
           .status(201)
-          .location(path.posix.join(req.originalUrl, `/${result_id}`))
+          // .location(path.posix.join(req.originalUrl, `/${result.id}`))
           .json(serializeResult(result))
       })
       .catch(next)
