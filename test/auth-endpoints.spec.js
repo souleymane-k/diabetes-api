@@ -79,21 +79,21 @@ describe('Auth Endpoints', function() {
     });
   });
 
-  describe('GET /api/auth/current-user', () => {
-    it('returns 200 and user with password, created_at and updated_at removed', () => {
-      return supertest(app)
-        .get('/api/auth/current-user')
-        .set('Authorization', helpers.createAuthToken(testUser))
-        .expect(200)
-        .then(res => {
-          expect(res.body.id).to.equal(1);
-          expect(res.body.username).to.equal(testUser.username);
-          // eslint-disable-next-line no-unused-expressions
-          expect(res.body.password).to.be.undefined;
-          // eslint-disable-next-line no-unused-expressions
-          expect(res.body.hasCurrentResult).to.be.false;
-        });
-    });
-  });
+//   describe('GET /api/auth/current-user', () => {
+//     it('returns 200 and user with password, created_at and updated_at removed', () => {
+//       return supertest(app)
+//         .get('/api/auth/current-user')
+//         .set('Authorization', helpers.createAuthToken(testUser))
+//         .expect(200)
+//         .then(res => {
+//           expect(res.body.id).to.equal(1);
+//           expect(res.body.username).to.equal(testUser.username);
+//           // eslint-disable-next-line no-unused-expressions
+//           expect(res.body.password).to.be.undefined;
+//           // eslint-disable-next-line no-unused-expressions
+//           expect(res.body.hasCurrentResult).to.be.false;
+//         });
+//     });
+//   });
 
 });

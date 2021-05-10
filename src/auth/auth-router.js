@@ -51,7 +51,7 @@ authRouter.post('/refresh', requireAuth, (req, res) => {
   })
 });
 authRouter
-  .route('/current-user')
+  .route('/user')
   .get(requireAuth, async (req, res, next) => {
     const user = UsersService.serialize(req.user);
     try {

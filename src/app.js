@@ -9,6 +9,7 @@ const usersRouter = require('./users/users-router')
 const authRouter = require('./auth/auth-router')
 const { NODE_ENV } = require('./config')
 const { response } = require('express')
+const {CLIENT_ORIGIN} = require('./config');
 
 const app = express()
 
@@ -17,6 +18,14 @@ const morganSetting = process.env.NODE_ENV === 'production' ? 'tiny' : 'common'
 app.use(morgan(morganSetting))
 app.use(cors())
 app.use(helmet())
+
+app.use(
+    cors({
+        origin: CLIENT_ORIGIN
+    })
+);
+
+
 
 
 app.use('/api/months',monthsRouter)

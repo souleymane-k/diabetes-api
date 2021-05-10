@@ -14,9 +14,7 @@ describe('Results Endpoints', () => {
     })
   
     after('disconnect from db', () => db.destroy())
-  
     before('cleanup', () => db('diabetes').truncate())
-  
     afterEach('cleanup', () => db('diabetes').truncate())
 
 
@@ -62,7 +60,7 @@ describe('Results Endpoints', () => {
           .expect(401, { error: 'Unauthorized request' })
       })
     })
-  //////////
+  
     describe('GET /api/results', () => {
       context(`Given no results`, () => {
         it(`responds with 200 and an empty list`, () => {
@@ -73,176 +71,149 @@ describe('Results Endpoints', () => {
         })
       })
   
-  //     context('Given there are bookmarks in the database', () => {
-  //       const testBookmarks = makeBookmarksArray()
+      context('Given there are results in the database', () => {
+        const testResults = []
   
-  //       beforeEach('insert bookmarks', () => {
-  //         return db
-  //           .into('bookmarks')
-  //           .insert(testBookmarks)
-  //       })
+        beforeEach('insert results', () => {
+          return db
+            .into('diabetes_results')
+            .insert(testResults)
+        })
   
-  //       it('gets the bookmarks from the store', () => {
-  //         return supertest(app)
-  //           .get('/api/bookmarks')
-  //           .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-  //           .expect(200, testBookmarks)
-  //       })
-  //     })
-  //   })
+        it('gets the results from the database', () => {
+          return supertest(app)
+            .get('/api/bookmarks')
+            .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
+            .expect(200, testResults)
+        })
+      })
+    
   
-  //   describe('GET /api/results/:id', () => {
-  //     context(`Given no results`, () => {
-  //       it(`responds 404 result doesn't exist`, () => {
-  //         return supertest(app)
-  //           .get(`/api/results/123`)
-  //           .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-  //           .expect(404, {
-  //             error: { message: `Result Not Found` }
-  //           })
-  //       })
-  //     })
-  //   })
+    describe('GET /api/results/:result_id', () => {
+      context(`Given no results`, () => {
+        it(`responds 404 result doesn't exist`, () => {
+          return supertest(app)
+            .get(`/api/results/123`)
+            .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
+            .expect(404, {
+              error: { message: `Result Not Found` }
+            })
+        })
+      })
+    })
   
-  //   describe('DELETE /api/results/:id', () => {
-  //     context(`Given no results`, () => {
-  //       it(`responds 404 result doesn't exist`, () => {
-  //         return supertest(app)
-  //           .delete(`/api/results/123`)
-  //           .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-  //           .expect(404, {
-  //             error: { message: `Result Not Found` }
-  //           })
-  //       })
-  //     })
+    describe('DELETE /api/results/:result_id', () => {
+      context(`Given no results`, () => {
+        it(`responds 404 result doesn't exist`, () => {
+          return supertest(app)
+            .delete(`/api/results/123`)
+            .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
+            .expect(404, {
+              error: { message: `Result Not Found` }
+            })
+        })
+      })
   
-  //     context('Given there are results in the database', () => {
-  //       beforeEach('insert results', () => {
-  //         return db
-  //           .into('bookmarks')
-  //           .insert(diabetes_results)
-  //       })
+      context('Given there are results in the database', () => {
+        beforeEach('insert results', () => {
+          return db
+            .into('diabetes_results')
+            .insert(results)
+        })
   
-  //       it('removes the bookmark by ID from the store', () => {
-  //         const idToRemove = 2
-  //         const expectedBookmarks = testBookmarks.filter(bm => bm.id !== idToRemove)
-  //         return supertest(app)
-  //           .delete(`/api/bookmarks/${idToRemove}`)
-  //           .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-  //           .expect(204)
-  //           .then(() =>
-  //             supertest(app)
-  //               .get(`/api/bookmarks`)
-  //               .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-  //               .expect(expectedBookmarks)
-  //           )
-  //       })
-  //     })
-  //   })
+        it('removes the result by ID from the database', () => {
+          const idToRemove = 2
+          const expectedResults = testResults.filter(bm => bm.id !== idToRemove)
+          return supertest(app)
+            .delete(`/api/results/${idToRemove}`)
+            .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
+            .expect(204)
+            .then(() =>
+              supertest(app)
+                .get(`/api/results`)
+                .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
+                .expect(expectedResults)
+            )
+        })
+      })
+    })
   
-  //   describe('POST /api/bookmarks', () => {
-  //     ['title', 'url', 'rating'].forEach(field => {
-  //       const newBookmark = {
-  //         title: 'test-title',
-  //         url: 'https://test.com',
-  //         rating: 2,
-  //       }
+
+
+
+    describe('POST /api/results', () => {
+      ['month_taken', 'meal_taken','result_read','date_tested','month_id','userid','description', 'diabetestype'].forEach(field => {
+        const newResult = {
+          month_taken: 'test-month',
+          meal_taken: 'test-meal',
+          date_tested: 01-01-21,
+          month_id: 1,
+          userid: 1,
+          description: 'test-description',
+          diabetestype: 'test-type',
+          
+        }
   
-  //       it(`responds with 400 missing '${field}' if not supplied`, () => {
-  //         delete newBookmark[field]
+        it(`responds with 400 missing '${field}' if not supplied`, () => {
+          delete newResult[field]
   
-  //         return supertest(app)
-  //           .post(`/api/bookmarks`)
-  //           .send(newBookmark)
-  //           .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-  //           .expect(400, {
-  //             error: { message: `'${field}' is required` }
-  //           })
-  //       })
-  //     })
+          return supertest(app)
+            .post(`/api/results`)
+            .send(newResult)
+            .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
+            .expect(400, {
+              error: { message: `'${field}' is required` }
+            })
+        })
+      })
   
-  //     it(`responds with 400 invalid 'rating' if not between 0 and 5`, () => {
-  //       const newBookmarkInvalidRating = {
-  //         title: 'test-title',
-  //         url: 'https://test.com',
-  //         rating: 'invalid',
-  //       }
-  //       return supertest(app)
-  //         .post(`/api/bookmarks`)
-  //         .send(newBookmarkInvalidRating)
-  //         .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-  //         .expect(400, {
-  //           error: { message: `'rating' must be a number between 0 and 5` }
-  //         })
-  //     })
   
-  //     it(`responds with 400 invalid 'url' if not a valid URL`, () => {
-  //       const newBookmarkInvalidUrl = {
-  //         title: 'test-title',
-  //         url: 'htp://invalid-url',
-  //         rating: 1,
-  //       }
-  //       return supertest(app)
-  //         .post(`/api/bookmarks`)
-  //         .send(newBookmarkInvalidUrl)
-  //         .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-  //         .expect(400, {
-  //           error: { message: `'url' must be a valid URL` }
-  //         })
-  //     })
+      it('adds a new result to the database', () => {
+        const newResult = {
+          month_taken: 'test-month',
+          meal_taken: 'test-meal',
+          date_tested: 01-01-21,
+          month_id: 1,
+          userid: 1,
+          description: 'test-description',
+          diabetestype: 'test-type',
+          
+        }
+        return supertest(app)
+          .post(`/api/bookmarks`)
+          .send(newResult)
+          .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
+          .expect(201)
+          .expect(res => {
+            expect(res.body.month_taken).to.eql(newBookmark.month_taken)
+            expect(res.body.meal_taken).to.eql(newResult.meal_taken)
+            expect(res.body.date_tested).to.eql(newResult.date_tested)
+            expect(res.body.month_id).to.eql(newResult.month_id)
+            expect(res.body.userid).to.eql(newResult.userid)
+            expect(res.body.description).to.eql(newResult.description)
+            expect(res.body.diabetestype).to.eql(newResult.diabetestype)
+            expect(res.body).to.have.property('id')
+            expect(res.headers.location).to.eql(`/api/results/${res.body.id}`)
+          })
+          .then(res =>
+            supertest(app)
+              .get(`/api/results/${res.body.id}`)
+              .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
+              .expect(res.body)
+          )
+      })
+    })
   
-  //     it('adds a new bookmark to the store', () => {
-  //       const newBookmark = {
-  //         title: 'test-title',
-  //         url: 'https://test.com',
-  //         description: 'test description',
-  //         rating: 1,
-  //       }
-  //       return supertest(app)
-  //         .post(`/api/bookmarks`)
-  //         .send(newBookmark)
-  //         .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-  //         .expect(201)
-  //         .expect(res => {
-  //           expect(res.body.title).to.eql(newBookmark.title)
-  //           expect(res.body.url).to.eql(newBookmark.url)
-  //           expect(res.body.description).to.eql(newBookmark.description)
-  //           expect(res.body.rating).to.eql(newBookmark.rating)
-  //           expect(res.body).to.have.property('id')
-  //           expect(res.headers.location).to.eql(`/api/bookmarks/${res.body.id}`)
-  //         })
-  //         .then(res =>
-  //           supertest(app)
-  //             .get(`/api/bookmarks/${res.body.id}`)
-  //             .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-  //             .expect(res.body)
-  //         )
-  //     })
-  
-  //     it('removes XSS attack content from response', () => {
-  //       const { maliciousBookmark, expectedBookmark } = makeMaliciousBookmark()
-  //       return supertest(app)
-  //         .post(`/api/bookmarks`)
-  //         .send(maliciousBookmark)
-  //         .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-  //         .expect(201)
-  //         .expect(res => {
-  //           expect(res.body.title).to.eql(expectedBookmark.title)
-  //           expect(res.body.description).to.eql(expectedBookmark.description)
-  //         })
-  //     })
-  //   })
-  
-  //   describe(`PATCH /api/bookmarks/:bookmark_id`, () => {
-  //     context(`Given no bookmarks`, () => {
-  //       it(`responds with 404`, () => {
-  //         const bookmarkId = 123456
-  //         return supertest(app)
-  //           .patch(`/api/bookmarks/${bookmarkId}`)
-  //           .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-  //           .expect(404, { error: { message: `Bookmark Not Found` } })
-  //       })
-  //     })
+    describe(`PATCH /api/results/:result_id`, () => {
+      context(`Given no results`, () => {
+        it(`responds with 404`, () => {
+          const resultId = 123456
+          return supertest(app)
+            .patch(`/api/bookmarks/${resultId}`)
+            .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
+            .expect(404, { error: { message: `Result Not Found` } })
+        })
+      })
   
   //     context('Given there are bookmarks in the database', () => {
   //       const testBookmarks = makeBookmarksArray()
@@ -290,7 +261,7 @@ describe('Results Endpoints', () => {
   //             }
   //           })
   //       })
-  
+         
   //       it(`responds with 204 when updating only a subset of fields`, () => {
   //         const idToUpdate = 2
   //         const updateBookmark = {
@@ -348,6 +319,6 @@ describe('Results Endpoints', () => {
   //             }
   //           })
   //       })
-  //     })
+      })
     })
   })
