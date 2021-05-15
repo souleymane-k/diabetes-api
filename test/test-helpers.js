@@ -2,7 +2,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const ResultsService = require('../src/results/results-service');
-//workouts = results
 function cleanTables(db) {
   return db.raw(
     `TRUNCATE

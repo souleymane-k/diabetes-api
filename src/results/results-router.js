@@ -1,5 +1,6 @@
 const express = require('express')
 const ResultsService = require('./results-service')
+const {requireAuth} = require('../middleware/jwt-auth')
 // const STORE = require('.../store.json')
 //const { v4: uuid } = require('uuid');
 
@@ -21,9 +22,9 @@ const serializeResult = result => ({
 
 resultsRouter
   .route('/')
-  .get((req, res, next) => {
+  .get(requireAuth,(req, res, next) => {
     const knexInstance = req.app.get('db')
-    ResultsService.getAllResults(knexInstance)
+    ResultsService.getAllResults(knexInstance,req.user.id)
       .then(results => {
         res.json(results.map(serializeResult))
       })

@@ -18,11 +18,21 @@ describe('Auth Endpoints', function() {
     app.set('db', db);
   });
 
-  after('disconnect from db', () => db.destroy());
-  before('cleanup', () => helpers.cleanTables(db));
-  afterEach('cleanup', () => helpers.cleanTables(db));
 
-  beforeEach('seed users', () => helpers.createUsers(db, testUsers));
+
+  after('disconnect from db', () => db.destroy())
+
+  before('cleanup', () => helpers.cleanTables(db))
+
+  afterEach('cleanup', () => helpers.cleanTables(db))
+
+
+
+//   after('disconnect from db', () => db.destroy());
+//   before('cleanup', () => helpers.cleanTables(db));
+//   afterEach('cleanup', () => helpers.cleanTables(db));
+
+//   beforeEach('seed users', () => helpers.createUsers(db, testUsers));
 
   describe('POST /api/auth/login', () => {
     const requiredFields = ['username', 'password'];

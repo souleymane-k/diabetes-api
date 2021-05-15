@@ -17,50 +17,6 @@ describe('Results Endpoints', () => {
     before('cleanup', () => db('diabetes').truncate())
     afterEach('cleanup', () => db('diabetes').truncate())
 
-
-
-    describe(`Unauthorized requests`, () => { 
-      let testResults = []
-      beforeEach('insert results', () => {
-        return db
-          .into('results')
-          .insert(testResults)
-      })
-      it(`responds with 401 Unauthorized for GET /api/results`, () => {
-        return supertest(app)
-          .get('/api/results')
-          .expect(401, { error: 'Unauthorized request' })
-      })
-  
-      it(`responds with 401 Unauthorized for POST /api/results`, () => {
-        return supertest(app)
-          .post('/api/results')
-          .send({ })
-          .expect(401, { error: 'Unauthorized request' })
-      })
-
-  
-      it(`responds with 401 Unauthorized for GET /api/results/:result_id`, () => {
-        
-        return supertest(app)
-          .get(`/api/results/${result_id}`)
-          .expect(401, { error: 'Unauthorized request' })
-      })
-  
-      it(`responds with 401 Unauthorized for DELETE /api/results/:result_id`, () => {
-        return supertest(app)
-          .delete(`/api/results/${result_id}`)
-          .expect(401, { error: 'Unauthorized request' })
-      })
-  
-      it(`responds with 401 Unauthorized for PATCH /api/results/:result_id`, () => {
-        return supertest(app)
-          .patch(`/api/results/${result_id}`)
-          .send({})
-          .expect(401, { error: 'Unauthorized request' })
-      })
-    })
-  
     describe('GET /api/results', () => {
       context(`Given no results`, () => {
         it(`responds with 200 and an empty list`, () => {
@@ -82,7 +38,7 @@ describe('Results Endpoints', () => {
   
         it('gets the results from the database', () => {
           return supertest(app)
-            .get('/api/bookmarks')
+            .get('/api/results')
             .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
             .expect(200, testResults)
         })
@@ -180,12 +136,12 @@ describe('Results Endpoints', () => {
           
         }
         return supertest(app)
-          .post(`/api/bookmarks`)
+          .post(`/api/results`)
           .send(newResult)
           .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
           .expect(201)
           .expect(res => {
-            expect(res.body.month_taken).to.eql(newBookmark.month_taken)
+            expect(res.body.month_taken).to.eql(newResult.month_taken)
             expect(res.body.meal_taken).to.eql(newResult.meal_taken)
             expect(res.body.date_tested).to.eql(newResult.date_tested)
             expect(res.body.month_id).to.eql(newResult.month_id)
@@ -209,116 +165,11 @@ describe('Results Endpoints', () => {
         it(`responds with 404`, () => {
           const resultId = 123456
           return supertest(app)
-            .patch(`/api/bookmarks/${resultId}`)
+            .patch(`/api/results/${resultId}`)
             .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
             .expect(404, { error: { message: `Result Not Found` } })
         })
       })
-  
-  //     context('Given there are bookmarks in the database', () => {
-  //       const testBookmarks = makeBookmarksArray()
-  
-  //       beforeEach('insert bookmarks', () => {
-  //         return db
-  //           .into('bookmarks')
-  //           .insert(testBookmarks)
-  //       })
-  
-  //       it('responds with 204 and updates the bookmark', () => {
-  //         const idToUpdate = 2
-  //         const updateBookmark = {
-  //           title: 'updated bookmark title',
-  //           url: 'https://updated-url.com',
-  //           description: 'updated bookmark description',
-  //           rating: 1,
-  //         }
-  //         const expectedArticle = {
-  //           ...testBookmarks[idToUpdate - 1],
-  //           ...updateBookmark
-  //         }
-  //         return supertest(app)
-  //           .patch(`/api/bookmarks/${idToUpdate}`)
-  //           .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-  //           .send(updateBookmark)
-  //           .expect(204)
-  //           .then(res =>
-  //             supertest(app)
-  //               .get(`/api/bookmarks/${idToUpdate}`)
-  //               .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-  //               .expect(expectedArticle)
-  //           )
-  //       })
-  
-  //       it(`responds with 400 when no required fields supplied`, () => {
-  //         const idToUpdate = 2
-  //         return supertest(app)
-  //           .patch(`/api/bookmarks/${idToUpdate}`)
-  //           .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-  //           .send({ irrelevantField: 'foo' })
-  //           .expect(400, {
-  //             error: {
-  //               message: `Request body must content either 'title', 'url', 'description' or 'rating'`
-  //             }
-  //           })
-  //       })
-         
-  //       it(`responds with 204 when updating only a subset of fields`, () => {
-  //         const idToUpdate = 2
-  //         const updateBookmark = {
-  //           title: 'updated bookmark title',
-  //         }
-  //         const expectedBookmark = {
-  //           ...testBookmarks[idToUpdate - 1],
-  //           ...updateBookmark
-  //         }
-  
-  //         return supertest(app)
-  //           .patch(`/api/bookmarks/${idToUpdate}`)
-  //           .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-  //           .send({
-  //             ...updateBookmark,
-  //             fieldToIgnore: 'should not be in GET response'
-  //           })
-  //           .expect(204)
-  //           .then(res =>
-  //             supertest(app)
-  //               .get(`/api/bookmarks/${idToUpdate}`)
-  //               .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-  //               .expect(expectedBookmark)
-  //           )
-  //       })
-  
-  //       it(`responds with 400 invalid 'rating' if not between 0 and 5`, () => {
-  //         const idToUpdate = 2
-  //         const updateInvalidRating = {
-  //           rating: 'invalid',
-  //         }
-  //         return supertest(app)
-  //           .patch(`/api/bookmarks/${idToUpdate}`)
-  //           .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-  //           .send(updateInvalidRating)
-  //           .expect(400, {
-  //             error: {
-  //               message: `'rating' must be a number between 0 and 5`
-  //             }
-  //           })
-  //       })
-  
-  //       it(`responds with 400 invalid 'url' if not a valid URL`, () => {
-  //         const idToUpdate = 2
-  //         const updateInvalidUrl = {
-  //           url: 'htp://invalid-url',
-  //         }
-  //         return supertest(app)
-  //           .patch(`/api/bookmarks/${idToUpdate}`)
-  //           .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-  //           .send(updateInvalidUrl)
-  //           .expect(400, {
-  //             error: {
-  //               message: `'url' must be a valid URL`
-  //             }
-  //           })
-  //       })
       })
     })
   })
