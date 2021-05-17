@@ -7,6 +7,7 @@ function cleanTables(db) {
     `TRUNCATE
       users,
       results,
+      months,
       RESTART IDENTITY CASCADE
     `
   );

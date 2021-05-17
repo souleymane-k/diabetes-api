@@ -35,6 +35,7 @@ const UsersService = {
   hashPassword(password) {
     return bcrypt.hash(password, 12)
   },
+  
   serializeUser(user) {
     return {
       id: user.id,

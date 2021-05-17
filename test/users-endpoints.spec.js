@@ -20,12 +20,18 @@ describe('User Endpoints', () => {
     app.set('db', db);
   });
 
-  before('clear table data', () => helpers.cleanTables(db));
-  afterEach('clear table data', () => helpers.cleanTables(db));
-  after('close db connection', () => db.destroy());
+//   // before('clear table data', () => helpers.cleanTables(db));
+//   // afterEach('clear table data', () => helpers.cleanTables(db));
+//   // after('close db connection', () => db.destroy());
+
+  after('disconnect from db', () => db.destroy())
+
+  before('clean the table', () => db.raw('TRUNCATE diabetes_results, diabetes_users, diabetes_months RESTART IDENTITY CASCADE'))
+
+  afterEach('cleanup',() => db.raw('TRUNCATE diabetes_results, diabetes_users, diabetes_months RESTART IDENTITY CASCADE'))
 
   describe('POST api/users', () => {
-    const requiredFields = ['username', 'email', 'password'];
+    const requiredFields = ['username','email','password'];
     requiredFields.forEach(field => {
       it(`returns 400 and error message when ${field} is missing`, () => {
         const requestBody = helpers.createNewUserRequest();
@@ -35,20 +41,20 @@ describe('User Endpoints', () => {
           .post('/api/users')
           .set('Content-Type', 'application/json')
           .send(requestBody)
-          .expect(400, {message: `${field} is required`});
+          .expect(400, {error: `Missing '${field}' in request body`});
       });
     });
 
     requiredFields.forEach(field => {
       it(`returns 400 if ${field} begins or ends with spaces`, () => {
         const requestBody = helpers.createNewUserRequest();
-        requestBody[field] = ` ${requestBody[field]} `; 
+        requestBody[field] = `${requestBody[field]}`; 
 
         return supertest(app)
           .post('/api/users')
           .set('Content-Type', 'application/json')
           .send(requestBody)
-          .expect(400, {message: `${field} cannot begin or end with spaces`});
+          .expect(400, {error: `${field} cannot begin or end with spaces`});
       });
     });
 
@@ -106,7 +112,7 @@ describe('User Endpoints', () => {
       
       return supertest(app)
         .post('/api/users')
-        .set('Content-Type', 'application/json')
+        .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
         .send(requestBody)
         .expect(201)
         .then(async res => {
@@ -124,26 +130,38 @@ describe('User Endpoints', () => {
     });
   });
 
-  describe('GET /api/users/:user_id', () => {
-    const testUsers = helpers.testUsers();
-    beforeEach('create users, results', async () => {
-      await helpers.createUsers(db, testUsers);
-      await helpers.createResults(db, result_id);
-    });
-    it('returns details on the current user and current cycle', () => {
-      return supertest(app)
-        .get('/api/users/1')
-        .set('Authorization', helpers.createAuthToken(testUsers[0]))
-        .expect(200)
-        .then(res => {
-          expect(res.body.currentUser.username).to.equal(testUsers[0].username);
-          expect(res.body.currentUser.result).to.equal(testUsers[0].result);
+//.set('Content-Type', 'application/json')
+
+
+
+//   describe('GET /api/users/:user_id', () => {
+//     const testUsers = helpers.testUsers();
+//     beforeEach('create users, results', async () => {
+//       await helpers.createUsers(db, testUsers);
+//       await helpers.createResults(db, result_id);
+//     });
+//     it('returns details on the current user and current cycle', () => {
+//       return supertest(app)
+//         .get('/api/users/1')
+//         .set('Authorization', helpers.createAuthToken(testUsers[0]))
+//         .expect(200)
+//         .then(res => {
+//           expect(res.body.currentUser.username).to.equal(testUsers[0].username);
+//           expect(res.body.currentUser.result).to.equal(testUsers[0].result);
           
-        });
-    });
+//         });
+//     });
     
-  });
+//   });
 });
+
+
+
+
+
+
+
+
 
 // const knex = require('knex')
 // const bcrypt = require('bcryptjs')
