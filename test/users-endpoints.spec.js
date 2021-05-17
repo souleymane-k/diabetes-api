@@ -30,6 +30,8 @@ describe('User Endpoints', () => {
 
   afterEach('cleanup',() => db.raw('TRUNCATE diabetes_results, diabetes_users, diabetes_months RESTART IDENTITY CASCADE'))
 
+
+
   describe('POST api/users', () => {
     const requiredFields = ['username','email','password'];
     requiredFields.forEach(field => {
@@ -45,20 +47,56 @@ describe('User Endpoints', () => {
       });
     });
 
-    requiredFields.forEach(field => {
-      it(`returns 400 if ${field} begins or ends with spaces`, () => {
-        const requestBody = helpers.createNewUserRequest();
-        requestBody[field] = `${requestBody[field]}`; 
+    // const requiredFields = ['username','email','password'];
+                  // requiredFields.forEach(field => {
+                  //   it(`returns 400 and error message when  ${field} begins or ends with spaces`, () => {
+                  //     const requestBody = helpers.createNewUserRequest();
+                  //     requestBody[field] = `${requestBody[field]}`; 
 
-        return supertest(app)
-          .post('/api/users')
-          .set('Content-Type', 'application/json')
-          .send(requestBody)
-          .expect(400, {error: `${field} cannot begin or end with spaces`});
-      });
-    });
+                  //     return supertest(app)
+                  //       .post('/api/users')
+                  //       .set('Content-Type', 'application/json')
+                  //       .send(requestBody)
+                  //       .expect(400, {error: `${field} cannot begin or end with spaces`});
+                  //   });
+                  // });
+// 
+    // it(`returns 400 and error message when username begins or ends with spaces`, () => {
+    //   const requestBody = helpers.createNewUserRequest();
+    //   // requestBody[field] = `${requestBody[field]}`; 
 
-    it('returns 400 and error message if username is less than 3 characters', () => {
+    //   return supertest(app)
+    //     .post('/api/users')
+    //     .set('Content-Type', 'application/json')
+    //     .send(requestBody)
+    //     .expect(400, {error: `username cannot begin or end with spaces`});
+    // });
+    // it(`returns 400 and error message when email begins or ends with spaces`, () => {
+    //   const requestBody = helpers.createNewUserRequest();
+    //   // requestBody[field] = `${requestBody[field]}`; 
+
+    //   return supertest(app)
+    //     .post('/api/users')
+    //     .set('Content-Type', 'application/json')
+    //     .send(requestBody)
+    //     .expect(400, {error: `email cannot begin or end with spaces`});
+    // });
+    // it(`returns 400 and error message when password begins or ends with spaces`, () => {
+    //   const requestBody = helpers.createNewUserRequest();
+    //   // requestBody[field] = `${requestBody[field]}`; 
+
+    //   return supertest(app)
+    //     .post('/api/users')
+    //     .set('Content-Type', 'application/json')
+    //     .send(requestBody)
+    //     .expect(400, {error: `password cannot begin or end with spaces`});
+    // });
+
+    // 
+
+    // 
+
+    it('returns 400 and error message if username is less than 6 characters', () => {
       const requestBody = helpers.createNewUserRequest();
       requestBody.username = 'f';
 
@@ -69,6 +107,8 @@ describe('User Endpoints', () => {
         .expect(400, {message: {error: true, username: 'username must be at least 6 characters'}});
         
     });
+
+    // .set('Content-Type', 'application/json')
 
 
     it('returns 400 and error message if invalid email format', () => {
@@ -95,7 +135,7 @@ describe('User Endpoints', () => {
 
     context('when a user already exists', () => {
       before('create users', async () => await helpers.createUsers(db, testUsers));
-      it('returns 400 and error message if same email is used', () => {
+      it('returns 400 and error message if same username is used', () => {
     
         const requestBody = helpers.createNewUserRequest();
         requestBody.username = testUsers[0].username;
@@ -103,7 +143,7 @@ describe('User Endpoints', () => {
           .post('/api/users')
           .set('Content-Type', 'application/json')
           .send(requestBody)
-          .expect(400, {message: 'email is already in use'});
+          .expect(400, {message: 'username is already in use'});
       });
     });
     
@@ -116,7 +156,7 @@ describe('User Endpoints', () => {
         .send(requestBody)
         .expect(201)
         .then(async res => {
-          const savedUser = await UserService.findById(db, res.body.id);
+          const savedUser = await UserService.findByUsername(db, res.body.id);
           const expectedAuthToken = helpers.createAuthToken(savedUser).split(' ')[1];
           expect(res.headers.location).to.equal(`/api/users/${savedUser.id}`);
           expect(res.body.authToken).to.equal(expectedAuthToken);

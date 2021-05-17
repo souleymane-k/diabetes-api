@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs')
-const xss = require('xss')
+ const xss = require('xss')
 
 const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&])[\S]+/
 
@@ -17,8 +17,50 @@ const UsersService = {
       .returning('*')
       .then(([user]) => user)
   },
+  // validateUsername(username) {
+  //   if (username) {
+  //     return 'username cannot begin or end with spaces'
+  //   }
+  // },
+
+  // validateEmail(email) {
+  //   if (!email) {
+  //     return 'email cannot begin or end with spaces'
+  //   }
+  // },
+
+  // validateUsername(username) {
+  //   const response = {};
+  //   if (username.length < 3) {
+  //     response.error = 'username must be at least 3 characters';
+  //   } else if (username.trim().indexOf(' ') === -1)
+  //     response.error = 'username cannot begin or end with spaces';
+  //   return response;
+  // },
+
+  // validateEmail(email) {
+  //   const response = {};
+  //   if (!/\S+@\S+/.test(email)) {
+  //     response.error = 'invalid email format';
+  //   }
+  //   return response;
+  // },
+
+  // validatePassword(password) {
+  //   const response = {};
+  //   if (password.length < 6) {
+  //     response.error = 'password must be at least 6 characters';
+  //   }
+  //   return response;
+  // },
+
+
+
+
+  /////
   validatePassword(password) {
     if (password.length < 8) {
+      // return 'password cannot begin or end with spaces'
       return 'Password be longer than 8 characters'
     }
     if (password.length > 72) {
@@ -35,13 +77,12 @@ const UsersService = {
   hashPassword(password) {
     return bcrypt.hash(password, 12)
   },
-  
+
   serializeUser(user) {
     return {
       id: user.id,
       email: xss(user.email),
       username: xss(user.username),
-      // date_created: new Date(user.date_created),
     }
   },
 }
