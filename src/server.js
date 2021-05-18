@@ -36,8 +36,8 @@ const db = knex({
 
 //  pg.defaults.ssl = process.env.NODE_ENV ==="production"?
 // {rejectUnauthorized:false}:false
-const db = knex({
-  client:"pg",
+// const db = knex({
+//   client:"pg",
   // connection:DATABASE_URL,
   // ssl: true,
   //   extra: {
@@ -45,7 +45,7 @@ const db = knex({
   //       rejectUnauthorized: false
   //     },
   //   },
-});
+// });
 
 //  const db = knex({
 //     client: 'pg',
