@@ -5,7 +5,3 @@ CREATE TABLE IF NOT EXISTS diabetes_users (
     password TEXT,
     confirm_password TEXT
 );
-ALTER TABLE diabetes_months
-  ADD COLUMN
-    patient INTEGER REFERENCES diabetes_users(id)
-    ON DELETE SET NULL;

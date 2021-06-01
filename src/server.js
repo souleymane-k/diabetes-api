@@ -10,17 +10,17 @@ const pg = require('pg');
 
 //  const app = express();
 //
-pg.defaults.ssl = process.env.NODE_ENV ==="production"?
-{rejectUnauthorized:false}:false
+// pg.defaults.ssl = process.env.NODE_ENV ==="production"?
+// {rejectUnauthorized:false}:false
 const db = knex({
   client:"pg",
   connection:DATABASE_URL,
-  ssl: true,
-    extra: {
-      ssl: {
-        rejectUnauthorized: false
-      },
-    },
+  // ssl: true,
+  //   extra: {
+  //     ssl: {
+  //       rejectUnauthorized: false
+  //     },
+  //   },
 });
 
 

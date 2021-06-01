@@ -4,12 +4,7 @@ const jwt = require('jsonwebtoken');
 const ResultsService = require('../src/results/results-service');
 function cleanTables(db) {
   return db.raw(
-    `TRUNCATE
-      users,
-      results,
-      months,
-      RESTART IDENTITY CASCADE
-    `
+    `TRUNCATE diabetes_results, diabetes_users, diabetes_months RESTART IDENTITY CASCADE`
   );
 }
 

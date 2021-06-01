@@ -1,10 +1,12 @@
 const { expect } = require('chai')
 const knex = require('knex')
 const app = require('../src/app')
+const helpers = require('./test-helpers');
 
 describe('Results Endpoints', () => {
     let db
-  
+    let testUsers = helpers.testUsers();
+    const testUser = testUsers[0];
     before('make knex instance', () => {
       db = knex({
         client: 'pg',
@@ -28,7 +30,7 @@ describe('Results Endpoints', () => {
         it(`responds with 401 and an empty list`, () => {
           return supertest(app)
             .get('/api/results')
-            .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
+            .set('Authorization', `Bearer ${helpers.createAuthToken(testUser)}`)
             .expect(401)
         })
       })
@@ -55,7 +57,7 @@ describe('Results Endpoints', () => {
         it(`responds 404 Result doesn't exist`, () => {
           return supertest(app)
             .get(`/api/results/123`)
-            .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
+            .set('Authorization', `Bearer ${helpers.createAuthToken(testUser)}`)
             .expect(404, {
               error: { message: `Result doesn't exist` }
             })
@@ -68,7 +70,7 @@ describe('Results Endpoints', () => {
         it(`responds 404 Result doesn't exist`, () => {
           return supertest(app)
             .delete(`/api/results/123`)
-            .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
+            .set('Authorization', `Bearer ${helpers.createAuthToken(testUser)}`)
             .expect(404, {
               error: { message: `Result doesn't exist` }
             })
@@ -98,12 +100,12 @@ describe('Results Endpoints', () => {
           const expectedResults = testResults.filter(bm => bm.id !== idToRemove)
           return supertest(app)
             .delete(`/api/results/${idToRemove}`)
-            .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
+            .set('Authorization', `Bearer ${helpers.createAuthToken(testUser)}`)
             .expect(204)
             .then(() =>
               supertest(app)
                 .get(`/api/results`)
-                .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
+                .set('Authorization', `Bearer ${helpers.createAuthToken(testUser)}`)
                 .expect(expectedResults)
             )
         })

@@ -1,6 +1,6 @@
 const express = require('express')
 const ResultsService = require('./results-service')
-const {requireAuth} = require('../middleware/jwt-auth')
+const { requireAuth } = require('../middleware/jwt-auth')
 // const STORE = require('.../store.json')
 //const { v4: uuid } = require('uuid');
 
@@ -10,44 +10,38 @@ const jsonParser = express.json()
 
 const serializeResult = result => ({
   id: result.id,
-  month_taken:result.month_taken,
-  meal_taken:result.meal_taken,
-  result_read:result.result_read,
-  date_tested:result.date_tested,
-  month_id:result.month_id,
-  userid:result.userid,
-  description:result.description,
-  diabetestype:result.diabetestype,
+  meal_taken: result.meal_taken,
+  result_read: result.result_read,
+  date_tested: result.date_tested,
+  month_taken: result.month_taken,
+  userid: result.userid,
+  description: result.description,
+  diabetestype: result.diabetestype,
 })
 
 resultsRouter
   .route('/')
-  .get(requireAuth,(req, res, next) => {
+  .get(requireAuth, (req, res, next) => {
     const knexInstance = req.app.get('db')
-    ResultsService.getAllResults(knexInstance,req.user.id)
+    ResultsService.getAllResults(knexInstance, req.user.id)
       .then(results => {
         res.json(results.map(serializeResult))
       })
       .catch(next)
   })
-  .post(jsonParser, (req, res, next) => {
-    const {month_taken, meal_taken, result_read, date_tested,month_id,userid,description,diabetestype} = req.body
-    const newResult = { month_taken, meal_taken, result_read,date_tested,month_id,userid,description,diabetestype}
-//month_id, userid,
+  .post(jsonParser, requireAuth, (req, res, next) => {
+    const {meal_taken, result_read,date_tested, month_taken,description, diabetestype } = req.body
+    const newResult = { meal_taken, result_read,date_tested, month_taken,description, diabetestype }
+    //month_id, userid,
     for (const [key, value] of Object.entries(newResult))
       if (value == null)
         return res.status(400).json({
           error: { message: `Missing '${key}' in request body` }
         })
 
-        newResult.month_taken = month_taken;
-        newResult.meal_taken = meal_taken;
-        newResult.result_read = result_read;
-        newResult.date_tested = date_tested;
-        newResult.month_id=month_id;
-        newResult.userid=userid;
-        newResult.description = description;
-        newResult.diabetestype = diabetestype;
+
+    newResult.userid = req.user.id;
+
 
     ResultsService.insertResult(
       req.app.get('db'),
@@ -62,7 +56,7 @@ resultsRouter
       .catch(next)
   })
 
-  resultsRouter
+resultsRouter
   .route('/:result_id')
   .all((req, res, next) => {
     ResultsService.getById(
@@ -94,9 +88,9 @@ resultsRouter
       .catch(next)
   })
   .patch(jsonParser, (req, res, next) => {
-    const {month_taken, meal_taken, result_read, date_tested,description,diabetestype} = req.body
-    const resultToUpdate = {month_taken, meal_taken, result_read, date_tested,description,diabetestype}
-  
+    const { meal_taken,result_read, date_tested,month_taken, description, diabetestype } = req.body
+    const resultToUpdate = {meal_taken, result_read, date_tested, month_taken,description, diabetestype }
+
     const numberOfValues = Object.values(resultToUpdate).filter(Boolean).length
     if (numberOfValues === 0)
       return res.status(400).json({
@@ -137,20 +131,20 @@ resultsRouter
 //   .post(jsonParser, (req, res) => {
 //   const {month_taken, meal_taken, result_read, date,month_id,user_id,description,diabetesType} = req.body
 //   const newResult = { id: uuid(), month_taken, meal_taken, result_read, date,month_id,user_id,description,diabetesType}
-       
+
 //        for (const [key, value] of Object.entries(newResult))
 //              if (value == null)
 //                return res.status(400).json({
 //                  error: { message: `Missing '${key}' in request body` }
 //                })
-       
+
 //        STORE.results.push(newResult)
-       
+
 //        res.status(201)
 //            .json(newResult);
-   
+
 //   })
-  
+
 
 //   resultsRouter
 //   .route('/:result_id')
@@ -171,15 +165,15 @@ resultsRouter
 //     // move implementation logic into here
 //   const{result_id} = req.params;
 //   const resultIndex = STORE.results.findIndex(r =>r.id === result_id) 
-  
+
 //   if (resultIndex === -1) {
 //     console.log(`result with id ${result_id} not found.`)
-   
+
 //     return res
 //       .status(404)
 //       .send('Result Not Found');
 //   }
- 
+
 //   STORE.results.splice(resultIndex, 1)
 
 //     res
