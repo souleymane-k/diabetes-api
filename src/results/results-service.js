@@ -1,6 +1,7 @@
 const ResultsService = {
-    getAllResults(knex) {
+    getAllResults(knex, user_id) {
       return knex.select('*').from('diabetes_results')
+      .where({user_id})
     },
   
     insertResult(knex, newResult) {
