@@ -47,7 +47,7 @@ describe('Auth Endpoints', function() {
      //`returns 400 and message when ${field} is missing`
     it('return 401 when invalid username', () => {
       const requestBody = {username: 'Jane Smith', password: testUser.password};
-
+      console.log(requestBody)
       return supertest(app)
         .post('/api/auth/login')
         .set('Content-Type', 'application/json')
